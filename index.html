@@ -85,6 +85,7 @@
             text-decoration: none;
             color: inherit;
         }
+        .proxy-item:hover { background: #1a1a1a; }
         .proxy-item:active { background: #1f1f1f; }
         .proxy-info { display: flex; align-items: center; gap: 10px; }
         .dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 5px #4ade80; }
@@ -97,10 +98,14 @@
             margin-right: 8px;
         }
         
-        /* Стилизация региона */
+        /* Стилизация региона и иконки */
         .region-box { display: flex; align-items: center; gap: 5px; }
-        .country-code { color: #555; font-size: 12px; font-weight: bold; }
-        .warn-icon { opacity: 0.35; font-size: 12px; }
+        .country-code { color: #555; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+        .warn-icon { 
+            opacity: 0.35; /* Приглушенный значок */
+            font-size: 12px;
+            margin-right: 2px;
+        }
 
         .footer { margin-top: 20px; text-align: left; padding-bottom: 40px; }
         .info-text { color: #555; font-size: 13px; margin-bottom: 15px; line-height: 1.4; }
@@ -124,11 +129,13 @@
         </div>
     </div>
     
-    <div id="proxy-list"></div>
+    <div id="proxy-list">
+        <div style="padding: 20px; text-align: center; color: #444;">Загрузка прокси-серверов...</div>
+    </div>
 
     <div class="footer">
         <div class="info-text">
-            Список обновляется автоматически. Только рабочие прокси выбранных регионов.
+            Список обновляется автоматически. RU-прокси всегда находятся в приоритете сверху.
         </div>
         <div class="copyright">
             telegaproxys © 2026
@@ -137,32 +144,48 @@
 </div>
 
 <script>
+    // Функция для перемешивания массива (Алгоритм Фишера-Йейтса)
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
     async function loadProxies() {
         const list = document.getElementById('proxy-list');
         const counterVal = document.getElementById('counter-val');
         
         try {
             const res = await fetch('data.json?t=' + Date.now());
-            let data = await res.json();
+            const data = await res.json();
             
-            // Перемешиваем
-            for (let i = data.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [data[i], data[j]] = [data[j], data[i]];
-            }
+            // 1. Делим данные на RU и остальные регионы
+            let ruGroup = data.filter(p => p.country === 'RU');
+            let otherGroup = data.filter(p => p.country !== 'RU');
 
-            counterVal.innerText = data.length;
+            // 2. Перемешиваем каждую группу отдельно
+            ruGroup = shuffle(ruGroup);
+            otherGroup = shuffle(otherGroup);
+
+            // 3. Соединяем: RU всегда идут первыми
+            const sortedData = [...ruGroup, ...otherGroup];
+
+            counterVal.innerText = sortedData.length;
             list.innerHTML = '';
 
             const lastHosts = JSON.parse(localStorage.getItem('prev_hosts') || '[]');
-            const currentHosts = data.map(p => p.host);
+            const currentHosts = sortedData.map(p => p.host);
 
-            data.slice(0, 100).forEach(p => {
+            // 4. Отрисовываем плашки (ограничим до 150 для производительности)
+            sortedData.slice(0, 150).forEach(p => {
                 const isNew = !lastHosts.includes(p.host);
                 const isRU = p.country === 'RU';
+                const link = p.link;
                 
                 list.innerHTML += `
-                    <a href="${p.link}" class="proxy-item">
+                    <a href="${link}" class="proxy-item">
                         <div class="proxy-info">
                             <span class="dot"></span>
                             <span class="host">${p.host}</span>
@@ -176,13 +199,19 @@
                 `;
             });
 
+            // Сохраняем хосты для проверки NEW при следующем визите
             localStorage.setItem('prev_hosts', JSON.stringify(currentHosts));
+
         } catch (e) {
+            console.error(e);
             list.innerHTML = '<div style="padding:20px;text-align:center;color:#444;">Обновление базы...</div>';
         }
     }
 
+    // Запуск при загрузке
     loadProxies();
+    
+    // Автоматическое обновление данных на странице каждые 5 минут
     setInterval(loadProxies, 300000); 
 </script>
 
