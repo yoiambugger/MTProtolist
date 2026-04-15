@@ -12,18 +12,26 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Загружаем всю историю, чтобы не было конфликтов
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+
       - name: Install dependencies
         run: pip install requests
+
       - name: Run checker
         run: python checker.py
+
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data.json
+          # Сначала забираем изменения из репозитория, чтобы не было ошибки rejected
+          git pull --rebase origin main
           git commit -m "Update proxies: $(date)" || exit 0
-          git push
+          git push origin main
