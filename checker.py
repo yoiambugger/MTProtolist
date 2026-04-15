@@ -6,59 +6,66 @@ import time
 SOURCES = [
     'https://raw.githubusercontent.com/Surfboardv2ray/TGProto/main/proxies.txt',
     'https://raw.githubusercontent.com/SoliSpirit/mtproto/master/all_proxies.txt',
-    'https://raw.githubusercontent.com/Grim1313/mtproto-for-telegram/master/all_proxies.txt'
+    'https://raw.githubusercontent.com/Grim1313/mtproto-for-telegram/master/all_proxies.txt',
+    'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_all.txt' # Твой новый источник
 ]
 
-# Твои регионы
-ALLOWED = ['RU', 'US', 'MD', 'DE', 'FI', 'SG', 'FR', 'SC']
+ALLOWED_COUNTRIES = ['RU', 'US', 'MD', 'DE', 'FI', 'SG', 'FR', 'SC']
 
-def get_country(host):
+def get_real_country(host):
     try:
-        # Простой пробив по API
-        r = requests.get(f"http://ip-api.com/json/{host.strip()}?fields=status,countryCode", timeout=3).json()
-        if r.get('status') == 'success':
-            return r.get('countryCode')
+        target = host.strip()
+        response = requests.get(f"http://ip-api.com/json/{target}?fields=status,countryCode", timeout=3)
+        data = response.json()
+        if data.get('status') == 'success':
+            return data.get('countryCode')
+        return 'UNKNOWN'
     except:
-        pass
-    return 'UN'
+        return 'UNKNOWN'
 
 def main():
-    print("--- ЗАПУСК ---")
-    raw_links = []
+    print("--- ЗАПУСК ОБНОВЛЕННОГО ЧЕКЕРА ---")
+    all_raw_links = []
     headers = {'User-Agent': 'Mozilla/5.0'}
 
     for url in SOURCES:
         try:
-            res = requests.get(url, headers=headers, timeout=15)
+            res = requests.get(url, headers=headers, timeout=20)
+            # Регулярка сама пропустит текст сверху, так как он не подходит под шаблон
             found = re.findall(r"(?:tg://proxy\?|https://t\.me/proxy\?)[^\s\"'<>]+", res.text)
-            raw_links.extend(found)
+            all_raw_links.extend(found)
+            print(f"Источник {url}: найдено {len(found)}")
         except: continue
 
-    unique = list(set(raw_links))
-    final = []
-
-    # Берем первые 100 для проверки, чтобы не ждать долго
-    for link in unique[:100]:
+    unique_links = list(set(all_raw_links))
+    final_data = []
+    
+    # Проверяем ГЕО (ограничим до 150 для баланса)
+    for link in unique_links[:150]:
         try:
-            clean = link.strip().replace('https://t.me/proxy?', 'tg://proxy?')
-            srv = re.search(r"server=([^&]+)", clean).group(1)
-            
-            # Определяем ГЕО
-            code = get_country(srv)
-            print(f"[{code}] {srv}")
+            clean_link = link.strip().replace('https://t.me/proxy?', 'tg://proxy?')
+            srv = re.search(r"server=([^&]+)", clean_link).group(1)
+            port = re.search(r"port=(\d+)", clean_link).group(1)
+            secret = re.search(r"secret=([^&]+)", clean_link).group(1)
 
-            if code in ALLOWED:
-                final.append({
+            country = get_real_country(srv)
+            print(f"[{country}] {srv}")
+
+            if country in ALLOWED_COUNTRIES:
+                final_data.append({
                     "host": srv,
-                    "link": clean,
-                    "country": code
+                    "port": port,
+                    "secret": secret,
+                    "link": clean_link,
+                    "country": country
                 })
-            time.sleep(1.4) # Лимит API
+            time.sleep(1.4) 
         except: continue
 
     with open('data.json', 'w', encoding='utf-8') as f:
-        json.dump(final, f, indent=2, ensure_ascii=False)
-    print(f"Сохранено: {len(final)}")
+        json.dump(final_data, f, indent=2, ensure_ascii=False)
+    
+    print(f"Готово! Сохранено {len(final_data)} проверенных прокси.")
 
 if __name__ == "__main__":
     main()
