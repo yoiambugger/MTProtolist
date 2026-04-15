@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTProto Proxy List</title>
+    <style>
+        body {
+            background-color: #0b0b0b;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .site-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        .site-subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 25px;
+        }
+
+        .header-nav {
+            margin-bottom: 25px;
+        }
+        .main-btn {
+            display: inline-block;
+            background: #1e1e1e;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+        .main-btn:hover { background: #252525; }
+
+        .status-header {
+            background: #161616;
+            padding: 16px 15px;
+            border-radius: 12px 12px 0 0;
+            border: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .count-text { font-size: 13px; color: #888; font-weight: 600; letter-spacing: 0.5px; }
+
+        .online-badge {
+            background-color: #06221f;
+            color: #4ade80;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        #proxy-list {
+            background: #161616;
+            border: 1px solid #222;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .proxy-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-top: 1px solid #222;
+            text-decoration: none;
+            color: inherit;
+        }
+        .proxy-item:hover { background: #1a1a1a; }
+        .proxy-item:active { background: #1f1f1f; }
+        .proxy-info { display: flex; align-items: center; gap: 10px; }
+        .dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 5px #4ade80; }
+        
+        .host { font-size: 13px; color: #efefef; word-break: break-all; max-width: 250px; overflow: hidden; text-overflow: ellipsis; }
+        .badge { 
+            background: #3b3181; color: #a5b4fc; 
+            font-size: 10px; padding: 2px 6px; 
+            border-radius: 4px; font-weight: bold;
+            margin-right: 8px;
+        }
+        .country { color: #555; font-size: 12px; white-space: nowrap; }
+
+        .footer {
+            margin-top: 20px;
+            text-align: left;
+            padding-bottom: 40px;
+        }
+        .info-text {
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .copyright {
+            color: #333;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="site-title">MTProto Proxy</div>
+    <div class="site-subtitle">Только проверенные и рабочие прокси-серверы</div>
+
+    <div class="header-nav">
+        <a href="https://t.me/telegaproxys" class="main-btn">Наш Telegram @telegaproxys</a>
+    </div>
+
+    <div class="status-header">
+        <span class="count-text">ОНЛАЙН СЕРВЕРЫ</span>
+        <div class="online-badge">
+            <span id="counter-val">0</span>&nbsp;онлайн
+        </div>
+    </div>
+    
+    <div id="proxy-list">
+        <div style="padding: 20px; text-align: center; color: #555;">Загрузка базы прокси...</div>
+    </div>
+
+    <div class="footer">
+        <div class="info-text">
+            Список проверяется автоматически каждый час. Все нерабочие серверы удаляются.
+        </div>
+        <div class="copyright">
+            telegaproxys © 2026
+        </div>
+    </div>
+</div>
+
+<script>
+    const DATA_SOURCE = 'data.json';
+
+    async function loadProxies() {
+        const listContainer = document.getElementById('proxy-list');
+        const counterVal = document.getElementById('counter-val');
+        
+        try {
+            // Загружаем наш проверенный список (добавляем timestamp чтобы не кэшировало)
+            const response = await fetch(DATA_SOURCE + '?t=' + Date.now());
+            let proxies = await response.json();
+
+            // 1. Перемешиваем массив (Алгоритм Фишера-Йейтса)
+            for (let i = proxies.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [proxies[i], proxies[j]] = [proxies[j], proxies[i]];
+            }
+
+            // Обновляем счетчик
+            counterVal.innerText = proxies.length;
+            listContainer.innerHTML = '';
+
+            if (proxies.length === 0) {
+                listContainer.innerHTML = '<div style="padding:20px; text-align:center; color:#555;">Рабочих прокси пока нет. Идет проверка источников...</div>';
+                return;
+            }
+
+            // 2. Достаем историю хостов из памяти браузера для метки NEW
+            const lastHosts = JSON.parse(localStorage.getItem('prev_hosts') || '[]');
+            const currentHosts = proxies.map(p => p.host);
+
+            // 3. Выводим прокси (максимум 100 для скорости)
+            proxies.slice(0, 100).forEach(p => {
+                const isNew = !lastHosts.includes(p.host);
+                const link = p.link || `tg://proxy?server=${p.host}&port=${p.port}&secret=${p.secret}`;
+                
+                listContainer.innerHTML += `
+                    <a href="${link}" class="proxy-item">
+                        <div class="proxy-info">
+                            <span class="dot"></span>
+                            <span class="host">${p.host}</span>
+                        </div>
+                        <div>
+                            ${isNew ? '<span class="badge">NEW</span>' : ''}
+                            <span class="country">MT ›</span>
+                        </div>
+                    </a>
+                `;
+            });
+
+            // Сохраняем текущие хосты, чтобы в следующий раз они не были "NEW"
+            localStorage.setItem('prev_hosts', JSON.stringify(currentHosts));
+
+        } catch (error) {
+            console.error('Ошибка загрузки data.json:', error);
+            listContainer.innerHTML = '<div style="padding:20px; text-align:center; color:#555;">База данных еще не сформирована роботом. Подождите пару минут и обновите страницу.</div>';
+        }
+    }
+
+    // Запускаем при открытии
+    loadProxies();
+    
+    // Обновляем данные каждые 5 минут без перезагрузки страницы
+    setInterval(loadProxies, 300000); 
+</script>
+
+</body>
+</html>
