@@ -5,7 +5,6 @@ on:
   schedule:
     - cron: '0 * * * *'
 
-# Убираем предупреждение Гитхаба, принудительно включая новый движок
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -15,7 +14,6 @@ jobs:
     permissions:
       contents: write
     steps:
-      # Используем последние версии экшенов (v4 и v5)
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 
@@ -31,16 +29,22 @@ jobs:
       - name: Run checker
         run: python checker.py
 
-      - name: Commit and Push
+      - name: Commit and Push (The Tank Method)
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
+          # 1. Прячем наш новый файл во временную папку
+          mv data.json /tmp/data.json
+          
+          # 2. Сбрасываем состояние репозитория до того, что сейчас на сервере Гитхаба
+          git fetch origin main
+          git reset --hard origin/main
+          
+          # 3. Возвращаем наш новый файл на место
+          mv /tmp/data.json data.json
+          
+          # 4. Сохраняем и выталкиваем в сеть
           git add data.json
-          
-          # Если изменений в прокси нет, робот просто закончит работу без ошибки
           git commit -m "Update proxies: $(date)" || exit 0
-          
-          # СИЛОВОЙ ПРИЕМ: сначала впитываем твои правки с сайта, потом ставим свои
-          git pull --rebase origin main
           git push origin main
