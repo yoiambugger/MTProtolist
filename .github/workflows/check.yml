@@ -5,18 +5,23 @@ on:
   schedule:
     - cron: '0 * * * *'
 
+# Убираем предупреждение Гитхаба, принудительно включая новый движок
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   check-and-save:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
+      # Используем последние версии экшенов (v4 и v5)
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Загружаем всю историю, чтобы не было конфликтов
+          fetch-depth: 0 
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
@@ -30,8 +35,12 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
           git add data.json
-          # Сначала забираем изменения из репозитория, чтобы не было ошибки rejected
-          git pull --rebase origin main
+          
+          # Если изменений в прокси нет, робот просто закончит работу без ошибки
           git commit -m "Update proxies: $(date)" || exit 0
+          
+          # СИЛОВОЙ ПРИЕМ: сначала впитываем твои правки с сайта, потом ставим свои
+          git pull --rebase origin main
           git push origin main
