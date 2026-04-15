@@ -1,0 +1,34 @@
+name: Proxy Auto Update
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Запуск каждый час ровно
+  workflow_dispatch: # Позволяет запустить вручную кнопкой
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Разрешаем роботу записывать файлы в репозиторий
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run checker
+        run: python checker.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "ProxyBot"
+          git config --global user.email "actions@github.com"
+          git add data.json
+          git commit -m "Update proxies: $(date)" || echo "No changes"
+          git push
