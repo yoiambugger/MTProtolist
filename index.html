@@ -22,7 +22,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Анимация пульсации для скелетона */
         @keyframes skeleton-pulse {
             0% { background-color: #1a1a1a; }
             50% { background-color: #252525; }
@@ -42,6 +41,7 @@
             padding: 15px;
             display: flex;
             justify-content: center;
+            overflow-x: hidden; /* Защита от горизонтального скролла */
         }
 
         .container {
@@ -49,7 +49,7 @@
             max-width: 420px;
         }
 
-        /* --- Шапка сайта --- */
+        /* --- Шапка --- */
         .status-badge-container { margin-bottom: 25px; animation-delay: 0.1s; }
         .site-header { animation-delay: 0.25s; }
         .description { color: #666; font-size: 14px; line-height: 1.4; margin: 18px 0 35px 0; animation-delay: 0.4s; }
@@ -89,7 +89,7 @@
         }
         .tg-channel-btn:hover { border-color: var(--accent-green); background: #222; }
 
-        /* --- Монолитный список --- */
+        /* --- Список --- */
         #proxy-list {
             display: flex; flex-direction: column; gap: 8px;
             background: var(--card-bg); padding: 8px;
@@ -112,9 +112,9 @@
             display: flex; align-items: center; text-decoration: none;
             color: white; transition: 0.15s ease; border: 1px solid transparent;
             opacity: 0; animation: fadeInUp var(--reveal-duration) ease forwards;
+            min-width: 0; /* Нужно для корректной обрезки текста в flex */
         }
 
-        /* НЕОНОВЫЙ GLOW ПРИ НАВЕДЕНИИ */
         .proxy-item:hover {
             background: #222; border-color: rgba(34, 197, 94, 0.3);
             box-shadow: 0 0 12px rgba(34, 197, 94, 0.25);
@@ -124,30 +124,51 @@
 
         .proxy-number {
             background: #252525; color: #555; width: 32px; height: 32px;
+            min-width: 32px; /* Чтобы номер не сжимался */
             display: flex; align-items: center; justify-content: center;
             border-radius: 6px; font-size: 12px; font-weight: 800; margin-right: 12px;
         }
 
-        .proxy-name { flex-grow: 1; font-size: 15px; font-weight: 600; display: flex; align-items: center; }
-
-        .badge-ru { opacity: 0.45; filter: saturate(0.8); font-size: 13px; margin-left: 6px; }
-        .geo-code {
-            font-size: 11px; font-weight: 800; color: #444; margin-right: 8px;
-            background: #252525; padding: 2px 5px; border-radius: 4px;
+        .proxy-name { 
+            flex-grow: 1; 
+            font-size: 15px; 
+            font-weight: 600; 
+            display: flex; 
+            align-items: center;
+            white-space: nowrap; /* Не переносить на новую строку */
+            overflow: hidden;    /* Прятать всё, что не влезло */
+            text-overflow: ellipsis; /* Добавлять троеточие */
+            min-width: 0; /* Магия flexbox для обрезки текста */
         }
-        .arrow { color: #333; font-size: 16px; }
 
-        /* --- СТИЛИ СКЕЛЕТОНА (ЗАГРУЗКИ) --- */
+        /* Бейджи */
+        .badge-ru { opacity: 0.45; filter: saturate(0.8); font-size: 13px; margin-left: 6px; flex-shrink: 0; }
+        
+        .badge-tls { 
+            opacity: 0.35; 
+            font-size: 13px; 
+            margin-left: 6px; 
+            filter: grayscale(1); 
+            flex-shrink: 0; 
+            cursor: help;
+        }
+
+        .geo-code {
+            font-size: 11px; font-weight: 800; color: #444; margin-left: 10px; margin-right: 8px;
+            background: #252525; padding: 2px 5px; border-radius: 4px; flex-shrink: 0;
+        }
+        .arrow { color: #333; font-size: 16px; flex-shrink: 0; }
+
+        /* --- Скелетоны --- */
         .skeleton {
             background: #1c1c1c; border-radius: 10px; padding: 12px;
             display: flex; align-items: center; margin-bottom: 8px;
         }
         .skeleton-box { animation: skeleton-pulse 1.5s infinite ease-in-out; border-radius: 4px; }
-        .sk-num { width: 32px; height: 32px; margin-right: 12px; border-radius: 6px; }
+        .sk-num { width: 32px; height: 32px; margin-right: 12px; border-radius: 6px; flex-shrink: 0; }
         .sk-name { width: 60%; height: 16px; }
-        .sk-geo { width: 30px; height: 16px; margin-left: auto; margin-right: 10px; }
+        .sk-geo { width: 30px; height: 16px; margin-left: auto; flex-shrink: 0; }
 
-        /* Предупреждение */
         .vpn-warning {
             background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color);
             border-radius: 12px; padding: 15px; display: flex; gap: 12px;
@@ -156,7 +177,7 @@
         .info-icon {
             background: #222; width: 20px; height: 20px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 10px; color: #555;
+            font-size: 10px; color: #555; flex-shrink: 0;
         }
         .warning-text { color: #555; font-size: 12px; line-height: 1.4; }
 
@@ -207,11 +228,6 @@
                 <div class="skeleton-box sk-name"></div>
                 <div class="skeleton-box sk-geo"></div>
             </div>
-            <div class="skeleton">
-                <div class="skeleton-box sk-num"></div>
-                <div class="skeleton-box sk-name"></div>
-                <div class="skeleton-box sk-geo"></div>
-            </div>
         </div>
     </div>
 
@@ -239,7 +255,7 @@
     }
 
     async function loadProxies() {
-        const proxyItemsContainer = document.getElementById('proxy-items-container');
+        const container = document.getElementById('proxy-items-container');
         const counterVal = document.getElementById('counter-val');
         
         try {
@@ -254,7 +270,7 @@
             const sortedData = [...ruGroup, ...otherGroup];
 
             counterVal.innerText = sortedData.length;
-            proxyItemsContainer.innerHTML = ''; // Скелетоны исчезают здесь
+            container.innerHTML = '';
 
             const lastHosts = JSON.parse(localStorage.getItem('prev_hosts') || '[]');
             const currentHosts = sortedData.map(p => p.host);
@@ -262,30 +278,33 @@
             sortedData.slice(0, 100).forEach((p, index) => {
                 const isNew = !lastHosts.includes(p.host);
                 const isRU = p.country === 'RU';
+                // ПРОВЕРКА FAKE TLS (ключ начинается на ee)
+                const isFakeTLS = p.secret && p.secret.toLowerCase().startsWith('ee');
                 const countryCode = p.country || 'UN';
                 const displayIndex = (index + 1).toString().padStart(2, '0');
                 
                 const item = document.createElement('a');
                 item.href = p.link;
                 item.className = 'proxy-item';
-                item.style.animationDelay = (0.7 + (index * 0.03)) + 's';
+                item.style.animationDelay = (0.7 + (index * 0.02)) + 's';
                 
                 item.innerHTML = `
                     <div class="proxy-number">${displayIndex}</div>
                     <div class="proxy-name">
-                        ${p.host}
+                        <span style="overflow: hidden; text-overflow: ellipsis;">${p.host}</span>
                         ${isRU ? '<span class="badge-ru">🇷🇺</span>' : ''}
-                        ${isNew ? '<span class="badge-new" style="background:var(--accent-green);color:black;font-size:8px;padding:1px 4px;border-radius:3px;margin-left:6px;font-weight:900;">NEW</span>' : ''}
+                        ${isFakeTLS ? '<span class="badge-tls" title="Fake TLS Proxy">👻</span>' : ''}
+                        ${isNew ? '<span class="badge-new" style="background:var(--accent-green);color:black;font-size:8px;padding:1px 4px;border-radius:3px;margin-left:6px;font-weight:900;flex-shrink:0;">NEW</span>' : ''}
                     </div>
                     <div class="geo-code">${countryCode}</div>
                     <div class="arrow">→</div>
                 `;
-                proxyItemsContainer.appendChild(item);
+                container.appendChild(item);
             });
 
             localStorage.setItem('prev_hosts', JSON.stringify(currentHosts));
         } catch (e) {
-            proxyItemsContainer.innerHTML = '<div style="padding:20px;text-align:center;color:#444;font-size:12px;">Ошибка сети...</div>';
+            container.innerHTML = '<div style="padding:20px;text-align:center;color:#444;font-size:12px;">Ошибка сети...</div>';
         }
     }
 
