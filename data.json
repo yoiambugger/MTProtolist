@@ -826,13 +826,6 @@
         "link": "tg://proxy?server=195.254.165.233&port=65535&secret=eeNEgYdJvXrFGRMCIMJdCQ"
     },
     {
-        "host": "93.183.88.188",
-        "port": "443",
-        "secret": "eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D",
-        "country": "UN",
-        "link": "tg://proxy?server=93.183.88.188&port=443&secret=eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D"
-    },
-    {
         "host": "23.88.51.230",
         "port": "443",
         "secret": "3QAAAAAAAAAAAAAAAAAAAAA=",
@@ -840,11 +833,11 @@
         "link": "tg://proxy?server=23.88.51.230&port=443&secret=3QAAAAAAAAAAAAAAAAAAAAA="
     },
     {
-        "host": "Q4.opt-meli.info",
+        "host": "93.183.88.188",
         "port": "443",
         "secret": "eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D",
         "country": "UN",
-        "link": "tg://proxy?server=Q4.opt-meli.info&port=443&secret=eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D"
+        "link": "tg://proxy?server=93.183.88.188&port=443&secret=eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D"
     },
     {
         "host": "syntax.ddnscdn.sbs.",
@@ -852,6 +845,13 @@
         "secret": "ee0000f00f0f775555fffffff5006e2e696d656469612e737465616d706f77657265642e636f6d",
         "country": "UN",
         "link": "tg://proxy?server=syntax.ddnscdn.sbs.&port=443&secret=ee0000f00f0f775555fffffff5006e2e696d656469612e737465616d706f77657265642e636f6d"
+    },
+    {
+        "host": "Q4.opt-meli.info",
+        "port": "443",
+        "secret": "eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D",
+        "country": "UN",
+        "link": "tg://proxy?server=Q4.opt-meli.info&port=443&secret=eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D"
     },
     {
         "host": "proxy-dag.ru",
