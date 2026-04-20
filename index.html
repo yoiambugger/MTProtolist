@@ -3,36 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Proxy | Active</title>
+    <title>Telegram Proxy | Premium</title>
     <style>
         :root {
             --bg-color: #0d0d0d;
             --card-bg: #161616;
-            --list-header-bg: #111111; /* Новый фон для шапки списка */
+            --list-header-bg: #111111;
             --accent-green: #22c55e;
             --text-main: #ffffff;
             --text-dim: #777;
             --border-color: #222;
-            /* Определяем параметры анимации по умолчанию */
             --reveal-duration: 0.6s;
-            --stagger-delay: 0.03s; /* Задержка между появлением карточек */
+            --stagger-delay: 0.03s;
         }
 
-        /* --- Базовая CSS-анимация для плавного появления --- */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Класс, который мы вешаем на анимируемые элементы */
+        /* Анимация пульсации для скелетона */
+        @keyframes skeleton-pulse {
+            0% { background-color: #1a1a1a; }
+            50% { background-color: #252525; }
+            100% { background-color: #1a1a1a; }
+        }
+
         .reveal {
-            opacity: 0; /* Изначально скрыт */
+            opacity: 0;
             animation: fadeInUp var(--reveal-duration) ease forwards;
         }
 
@@ -48,69 +46,30 @@
 
         .container {
             width: 100%;
-            max-width: 420px; /* Уменьшил ширину сайта для компактности */
+            max-width: 420px;
         }
 
-        /* --- Последовательное появление шапки сайта --- */
-        .status-badge-container {
-            margin-bottom: 25px;
-            animation-delay: 0.1s; /* Появляется первым */
-        }
+        /* --- Шапка сайта --- */
+        .status-badge-container { margin-bottom: 25px; animation-delay: 0.1s; }
+        .site-header { animation-delay: 0.25s; }
+        .description { color: #666; font-size: 14px; line-height: 1.4; margin: 18px 0 35px 0; animation-delay: 0.4s; }
 
-        .site-header {
-            animation-delay: 0.25s; /* Чуть позже */
-        }
-
-        .description {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.4;
-            margin: 18px 0 35px 0;
-            animation-delay: 0.4s;
-        }
-
-        .vpn-warning {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 15px;
-            display: flex;
-            gap: 12px;
-            margin-top: 25px;
-            animation-delay: 0.5s; /* Блок предупреждения в конце шапки */
-        }
-
-        /* --- Остальные стили интерфейса --- */
         .status-badge {
-            display: inline-flex;
-            align-items: center;
+            display: inline-flex; align-items: center;
             background: rgba(34, 197, 94, 0.07);
             border: 1px solid rgba(34, 197, 94, 0.15);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.8px;
-            color: var(--accent-green);
-            text-transform: uppercase;
+            padding: 5px 12px; border-radius: 20px;
+            font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+            color: var(--accent-green); text-transform: uppercase;
         }
 
         .pulse-dot {
-            width: 7px;
-            height: 7px;
-            background-color: var(--accent-green);
-            border-radius: 50%;
-            margin-right: 8px;
-            position: relative;
+            width: 7px; height: 7px; background-color: var(--accent-green);
+            border-radius: 50%; margin-right: 8px; position: relative;
         }
-
         .pulse-dot::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: var(--accent-green);
-            border-radius: 50%;
+            content: ""; position: absolute; width: 100%; height: 100%;
+            background-color: var(--accent-green); border-radius: 50%;
             animation: pulse 2s infinite;
         }
 
@@ -119,181 +78,93 @@
             100% { transform: scale(2.5); opacity: 0; }
         }
 
-        .site-header h1 {
-            font-size: 38px;
-            margin: 0;
-            font-weight: 800;
-            line-height: 1;
-        }
-
-        .site-header .accent {
-            color: var(--accent-green);
-            display: block;
-        }
+        .site-header h1 { font-size: 38px; margin: 0; font-weight: 800; line-height: 1; }
+        .site-header .accent { color: var(--accent-green); display: block; }
 
         .tg-channel-btn {
-            display: inline-flex;
-            align-items: center;
-            background: #1a1a1a;
-            color: #efefef;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-top: 15px;
-            border: 1px solid var(--border-color);
-            transition: 0.2s;
+            display: inline-flex; align-items: center; background: #1a1a1a;
+            color: #efefef; text-decoration: none; padding: 8px 15px;
+            border-radius: 10px; font-size: 13px; font-weight: 600;
+            margin-top: 15px; border: 1px solid var(--border-color); transition: 0.2s;
         }
+        .tg-channel-btn:hover { border-color: var(--accent-green); background: #222; }
 
-        .tg-channel-btn:hover {
-            border-color: var(--accent-green);
-            background: #222;
-        }
-
-        /* --- ОБНОВЛЕННАЯ ШАПКА СПИСКА: теперь это монолитный блок --- */
+        /* --- Монолитный список --- */
         #proxy-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            background: var(--card-bg);
-            padding: 8px;
-            border: 1px solid var(--border-color);
-            border-radius: 12px; /* Приглушенные, острее углы всего блока */
+            display: flex; flex-direction: column; gap: 8px;
+            background: var(--card-bg); padding: 8px;
+            border: 1px solid var(--border-color); border-radius: 12px;
         }
 
         .list-inner-header {
-            background: var(--list-header-bg); /* Более темный фон для шапки */
-            border-bottom: 1px solid var(--border-color); /* Приглушенная обводка */
-            padding: 10px 18px;
-            margin: -8px -8px 0 -8px; /* Убираем отступы контейнера, чтобы шапка была в край */
-            border-radius: 12px 12px 0 0; /* Те же острые углы для шапки */
-            font-size: 11px;
-            color: var(--text-dim);
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            background: var(--list-header-bg); border-bottom: 1px solid var(--border-color);
+            padding: 10px 18px; margin: -8px -8px 0 -8px;
+            border-radius: 12px 12px 0 0; font-size: 11px;
+            color: var(--text-dim); font-weight: 700;
+            display: flex; align-items: center; justify-content: space-between;
         }
 
-        .online-count {
-            color: var(--accent-green);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+        .online-count { color: var(--accent-green); display: flex; align-items: center; gap: 5px; }
 
-        /* --- Стили анимированной карточки прокси --- */
+        /* --- Карточка прокси --- */
         .proxy-item {
-            background: #1c1c1c;
-            border-radius: 10px; /* Приглушенные углы карточки */
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            transition: 0.2s;
-            border: 1px solid transparent;
-            /* Важно для Reveal: начальное состояние карточки списка */
-            opacity: 0;
-            animation: fadeInUp var(--reveal-duration) ease forwards;
+            background: #1c1c1c; border-radius: 10px; padding: 12px;
+            display: flex; align-items: center; text-decoration: none;
+            color: white; transition: 0.15s ease; border: 1px solid transparent;
+            opacity: 0; animation: fadeInUp var(--reveal-duration) ease forwards;
         }
 
-        .proxy-item:active {
-            transform: scale(0.98);
+        /* НЕОНОВЫЙ GLOW ПРИ НАВЕДЕНИИ */
+        .proxy-item:hover {
+            background: #222; border-color: rgba(34, 197, 94, 0.3);
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.25);
         }
+
+        .proxy-item:active { transform: scale(0.98); }
 
         .proxy-number {
-            background: #252525;
-            color: #555;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 800;
-            margin-right: 12px;
+            background: #252525; color: #555; width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 6px; font-size: 12px; font-weight: 800; margin-right: 12px;
         }
 
-        .proxy-name {
-            flex-grow: 1;
-            font-size: 15px;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: flex;
-            align-items: center;
-        }
+        .proxy-name { flex-grow: 1; font-size: 15px; font-weight: 600; display: flex; align-items: center; }
 
-        .badge-ru { 
-            opacity: 0.45;
-            filter: saturate(0.8);
-            font-size: 13px; 
-            margin-left: 6px; 
-        }
-
+        .badge-ru { opacity: 0.45; filter: saturate(0.8); font-size: 13px; margin-left: 6px; }
         .geo-code {
-            font-size: 11px;
-            font-weight: 800;
-            color: #444;
-            margin-right: 8px;
-            background: #252525;
-            padding: 2px 5px;
-            border-radius: 4px;
+            font-size: 11px; font-weight: 800; color: #444; margin-right: 8px;
+            background: #252525; padding: 2px 5px; border-radius: 4px;
         }
+        .arrow { color: #333; font-size: 16px; }
 
-        .arrow {
-            color: #333;
-            font-size: 16px;
+        /* --- СТИЛИ СКЕЛЕТОНА (ЗАГРУЗКИ) --- */
+        .skeleton {
+            background: #1c1c1c; border-radius: 10px; padding: 12px;
+            display: flex; align-items: center; margin-bottom: 8px;
         }
+        .skeleton-box { animation: skeleton-pulse 1.5s infinite ease-in-out; border-radius: 4px; }
+        .sk-num { width: 32px; height: 32px; margin-right: 12px; border-radius: 6px; }
+        .sk-name { width: 60%; height: 16px; }
+        .sk-geo { width: 30px; height: 16px; margin-left: auto; margin-right: 10px; }
 
+        /* Предупреждение */
+        .vpn-warning {
+            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 15px; display: flex; gap: 12px;
+            margin-top: 25px; animation-delay: 0.5s;
+        }
         .info-icon {
-            background: #222;
-            width: 20px;
-            height: 20px;
-            min-width: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            color: #555;
+            background: #222; width: 20px; height: 20px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px; color: #555;
         }
+        .warning-text { color: #555; font-size: 12px; line-height: 1.4; }
 
-        .warning-text {
-            color: #555;
-            font-size: 12px;
-            line-height: 1.4;
-        }
-
-        .footer-tag {
-            text-align: center;
-            margin-top: 25px;
-            padding-bottom: 20px;
-        }
-
+        .footer-tag { text-align: center; margin-top: 25px; padding-bottom: 20px; }
         .mtproto-label {
-            display: inline-block;
-            border: 1px solid #222;
-            padding: 3px 10px;
-            border-radius: 5px;
-            font-size: 9px;
-            color: #333;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        .badge-new { 
-            background: var(--accent-green); 
-            color: black; 
-            font-size: 8px; 
-            padding: 1px 4px; 
-            border-radius: 3px; 
-            margin-left: 6px;
-            font-weight: 900;
+            display: inline-block; border: 1px solid #222; padding: 3px 10px;
+            border-radius: 5px; font-size: 9px; color: #333;
+            letter-spacing: 1.5px; text-transform: uppercase;
         }
     </style>
 </head>
@@ -321,19 +192,33 @@
             <span>СПИСОК ДОСТУПНЫХ УЗЛОВ</span>
             <div class="online-count">
                 <span style="font-size: 8px;">●</span> 
-                <span id="counter-val">0</span> ОНЛАЙН
+                <span id="counter-val">...</span> ОНЛАЙН
             </div>
         </div>
 
         <div id="proxy-items-container">
-            <div style="padding: 20px; text-align: center; color: #333; font-size: 12px;">Загрузка списка...</div>
+            <div class="skeleton">
+                <div class="skeleton-box sk-num"></div>
+                <div class="skeleton-box sk-name"></div>
+                <div class="skeleton-box sk-geo"></div>
+            </div>
+            <div class="skeleton">
+                <div class="skeleton-box sk-num"></div>
+                <div class="skeleton-box sk-name"></div>
+                <div class="skeleton-box sk-geo"></div>
+            </div>
+            <div class="skeleton">
+                <div class="skeleton-box sk-num"></div>
+                <div class="skeleton-box sk-name"></div>
+                <div class="skeleton-box sk-geo"></div>
+            </div>
         </div>
     </div>
 
     <div class="vpn-warning reveal">
         <div class="info-icon">i</div>
         <div class="warning-text">
-            Прокси не работает при включённом VPN. Отключи VPN перед подключением, иначе соединение не установится.
+            Прокси не работает при включённом VPN. Отключи VPN перед подключением.
         </div>
     </div>
 
@@ -354,7 +239,6 @@
     }
 
     async function loadProxies() {
-        // Мы изменили HTML-структуру, теперь список анимируется целиком, а карточки - внутри.
         const proxyItemsContainer = document.getElementById('proxy-items-container');
         const counterVal = document.getElementById('counter-val');
         
@@ -365,22 +249,15 @@
             
             let ruGroup = data.filter(p => p.country === 'RU');
             let otherGroup = data.filter(p => p.country !== 'RU');
-
             ruGroup = shuffle(ruGroup);
             otherGroup = shuffle(otherGroup);
-
             const sortedData = [...ruGroup, ...otherGroup];
+
             counterVal.innerText = sortedData.length;
-            
-            // Очищаем только контейнер карточек, а не весь список с шапкой
-            proxyItemsContainer.innerHTML = '';
+            proxyItemsContainer.innerHTML = ''; // Скелетоны исчезают здесь
 
             const lastHosts = JSON.parse(localStorage.getItem('prev_hosts') || '[]');
             const currentHosts = sortedData.map(p => p.host);
-
-            // Получаем CSS-переменные для расчета задержки
-            const styles = getComputedStyle(document.documentElement);
-            const baseStaggerDelay = parseFloat(styles.getPropertyValue('--stagger-delay')) || 0.03;
 
             sortedData.slice(0, 100).forEach((p, index) => {
                 const isNew = !lastHosts.includes(p.host);
@@ -391,31 +268,24 @@
                 const item = document.createElement('a');
                 item.href = p.link;
                 item.className = 'proxy-item';
-                
-                // --- ГЛАВНАЯ ЧАСТЬ: Stagger Reveal ---
-                // Мы рассчитываем animation-delay для каждой карточки в зависимости от её индекса.
-                // Также добавляем небольшую задержку (0.8s), чтобы список начал появляться ПОСЛЕ шапки.
-                const revealStartDelay = 0.8; 
-                item.style.animationDelay = (revealStartDelay + (index * baseStaggerDelay)) + 's';
+                item.style.animationDelay = (0.7 + (index * 0.03)) + 's';
                 
                 item.innerHTML = `
                     <div class="proxy-number">${displayIndex}</div>
                     <div class="proxy-name">
                         ${p.host}
                         ${isRU ? '<span class="badge-ru">🇷🇺</span>' : ''}
-                        ${isNew ? '<span class="badge-new">NEW</span>' : ''}
+                        ${isNew ? '<span class="badge-new" style="background:var(--accent-green);color:black;font-size:8px;padding:1px 4px;border-radius:3px;margin-left:6px;font-weight:900;">NEW</span>' : ''}
                     </div>
                     <div class="geo-code">${countryCode}</div>
                     <div class="arrow">→</div>
                 `;
-                // Добавляем карточку в её контейнер
                 proxyItemsContainer.appendChild(item);
             });
 
             localStorage.setItem('prev_hosts', JSON.stringify(currentHosts));
-
         } catch (e) {
-            proxyItemsContainer.innerHTML = '<div style="padding:20px;text-align:center;color:#444;font-size:12px;">Ошибка обновления базы...</div>';
+            proxyItemsContainer.innerHTML = '<div style="padding:20px;text-align:center;color:#444;font-size:12px;">Ошибка сети...</div>';
         }
     }
 
@@ -425,4 +295,3 @@
 
 </body>
 </html>
-
