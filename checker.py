@@ -1,40 +1,36 @@
 import requests
 import re
 import json
-import os
 
-# Твои источники (обновленный список с новыми ссылками)
+# Твои проверенные источники
 SOURCES = [
     "https://raw.githubusercontent.com/SoliSpirit/mtproto/master/all_proxies.txt",
     "https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_all.txt",
-    "https://raw.githubusercontent.com/Argh94/Proxy-List/main/MTProto.txt",
-    "https://raw.githubusercontent.com/yebekhe/TelegramV2RayCollector/main/sub/proxies.txt",
-    "https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt",
-    "https://raw.githubusercontent.com/NidukaAkuratiya/MTProto-Proxy-List/main/proxies.txt"
+    "https://raw.githubusercontent.com/Argh94/Proxy-List/main/MTProto.txt"
 ]
 
 def get_country_code(host):
-    # Базовая проверка на RU регион
     if host.lower().endswith('.ru') or '.ru.' in host.lower():
         return "RU"
-    return "UN" # Остальные регионы
+    return "UN"
 
 def collect_proxies():
     all_proxies = []
     unique_hosts = set()
 
-    print("--- ЗАПУСК СБОРА ПРОКСИ ---")
+    print("--- ЗАПУСК УНИВЕРСАЛЬНОГО СБОРА ---")
 
     for url in SOURCES:
         try:
             print(f"Загружаю: {url}")
-            # Увеличил таймаут, так как некоторые источники могут тупить
             response = requests.get(url, timeout=20)
             if response.status_code == 200:
-                # Ищем ссылки формата tg://proxy?server=...&port=...&secret=...
-                # Регулярка теперь более гибкая, чтобы ловить всё
-                found = re.findall(r"tg://proxy\?server=([A-Za-z0-9\-\.]+)\&port=([0-9]+)\&secret=([A-Za-z0-9]+)", response.text)
+                # Универсальная регулярка: 
+                # (?:tg://proxy|https://t\.me/proxy) — ищет оба формата начала ссылки
+                # ([^& \n\r\t]+) — забирает данные до первого разделителя или пробела
+                found = re.findall(r"(?:tg://proxy|https://t\.me/proxy)\?server=([^&]+)&port=([0-9]+)&secret=([^& \n\r\t]+)", response.text)
                 
+                count_before = len(unique_hosts)
                 for host, port, secret in found:
                     if host not in unique_hosts:
                         proxy_data = {
@@ -42,21 +38,22 @@ def collect_proxies():
                             "port": port,
                             "secret": secret,
                             "country": get_country_code(host),
+                            # Сохраняем всегда в tg://, так как это стандарт для приложений
                             "link": f"tg://proxy?server={host}&port={port}&secret={secret}"
                         }
                         all_proxies.append(proxy_data)
                         unique_hosts.add(host)
                 
-                print(f"Найдено уникальных прокси в источнике: {len(found)}")
+                print(f"Добавлено новых уникальных прокси: {len(unique_hosts) - count_before}")
         except Exception as e:
-            print(f"Пропустил источник {url} из-за ошибки: {e}")
+            print(f"Ошибка источника {url}: {e}")
 
-    # Сохраняем результат в data.json для сайта
+    # Записываем в data.json
     with open('data.json', 'w', encoding='utf-8') as f:
         json.dump(all_proxies, f, indent=4, ensure_ascii=False)
     
     print(f"--- СБОР ЗАВЕРШЕН ---")
-    print(f"Всего сохранено в data.json: {len(all_proxies)}")
+    print(f"Итого в базе: {len(all_proxies)}")
 
 if __name__ == "__main__":
     collect_proxies()
