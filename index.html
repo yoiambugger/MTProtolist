@@ -8,10 +8,32 @@
         :root {
             --bg-color: #0d0d0d;
             --card-bg: #161616;
+            --list-header-bg: #111111; /* Новый фон для шапки списка */
             --accent-green: #22c55e;
             --text-main: #ffffff;
-            --text-dim: #777; /* Сделал чуть темнее для приглушенности */
+            --text-dim: #777;
             --border-color: #222;
+            /* Определяем параметры анимации по умолчанию */
+            --reveal-duration: 0.6s;
+            --stagger-delay: 0.03s; /* Задержка между появлением карточек */
+        }
+
+        /* --- Базовая CSS-анимация для плавного появления --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Класс, который мы вешаем на анимируемые элементы */
+        .reveal {
+            opacity: 0; /* Изначально скрыт */
+            animation: fadeInUp var(--reveal-duration) ease forwards;
         }
 
         body {
@@ -19,21 +41,46 @@
             color: var(--text-main);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
-            padding: 15px; /* Уменьшил отступы по краям */
+            padding: 15px;
             display: flex;
             justify-content: center;
         }
 
         .container {
             width: 100%;
-            max-width: 440px; /* Уменьшил ширину сайта для компактности */
+            max-width: 420px; /* Уменьшил ширину сайта для компактности */
         }
 
-        /* Статус-бар */
+        /* --- Последовательное появление шапки сайта --- */
         .status-badge-container {
             margin-bottom: 25px;
+            animation-delay: 0.1s; /* Появляется первым */
         }
 
+        .site-header {
+            animation-delay: 0.25s; /* Чуть позже */
+        }
+
+        .description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 18px 0 35px 0;
+            animation-delay: 0.4s;
+        }
+
+        .vpn-warning {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            animation-delay: 0.5s; /* Блок предупреждения в конце шапки */
+        }
+
+        /* --- Остальные стили интерфейса --- */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -72,9 +119,8 @@
             100% { transform: scale(2.5); opacity: 0; }
         }
 
-        /* Заголовок */
         .site-header h1 {
-            font-size: 38px; /* Немного уменьшил шрифт */
+            font-size: 38px;
             margin: 0;
             font-weight: 800;
             line-height: 1;
@@ -85,7 +131,6 @@
             display: block;
         }
 
-        /* Кнопка ТГ */
         .tg-channel-btn {
             display: inline-flex;
             align-items: center;
@@ -106,20 +151,23 @@
             background: #222;
         }
 
-        .description {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.4;
-            margin: 18px 0 35px 0;
+        /* --- ОБНОВЛЕННАЯ ШАПКА СПИСКА: теперь это монолитный блок --- */
+        #proxy-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: var(--card-bg);
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px; /* Приглушенные, острее углы всего блока */
         }
 
-        /* Мини-панель */
-        .online-panel {
-            background: #111;
-            border: 1px solid var(--border-color);
-            border-bottom: none;
+        .list-inner-header {
+            background: var(--list-header-bg); /* Более темный фон для шапки */
+            border-bottom: 1px solid var(--border-color); /* Приглушенная обводка */
             padding: 10px 18px;
-            border-radius: 12px 12px 0 0;
+            margin: -8px -8px 0 -8px; /* Убираем отступы контейнера, чтобы шапка была в край */
+            border-radius: 12px 12px 0 0; /* Те же острые углы для шапки */
             font-size: 11px;
             color: var(--text-dim);
             font-weight: 700;
@@ -135,20 +183,10 @@
             gap: 5px;
         }
 
-        /* Список */
-        #proxy-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            background: var(--card-bg);
-            padding: 8px;
-            border: 1px solid var(--border-color);
-            border-radius: 0 0 12px 12px;
-        }
-
+        /* --- Стили анимированной карточки прокси --- */
         .proxy-item {
             background: #1c1c1c;
-            border-radius: 10px;
+            border-radius: 10px; /* Приглушенные углы карточки */
             padding: 12px;
             display: flex;
             align-items: center;
@@ -156,6 +194,9 @@
             color: white;
             transition: 0.2s;
             border: 1px solid transparent;
+            /* Важно для Reveal: начальное состояние карточки списка */
+            opacity: 0;
+            animation: fadeInUp var(--reveal-duration) ease forwards;
         }
 
         .proxy-item:active {
@@ -187,19 +228,17 @@
             align-items: center;
         }
 
-        /* Приглушенный флаг */
         .badge-ru { 
-            opacity: 0.45; /* Приглушил яркость флага */
+            opacity: 0.45;
             filter: saturate(0.8);
             font-size: 13px; 
             margin-left: 6px; 
         }
 
-        /* Геолокация возле стрелки */
         .geo-code {
             font-size: 11px;
             font-weight: 800;
-            color: #444; /* Темный цвет для кода региона */
+            color: #444;
             margin-right: 8px;
             background: #252525;
             padding: 2px 5px;
@@ -209,17 +248,6 @@
         .arrow {
             color: #333;
             font-size: 16px;
-        }
-
-        /* Предупреждение */
-        .vpn-warning {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 15px;
-            display: flex;
-            gap: 12px;
-            margin-top: 25px;
         }
 
         .info-icon {
@@ -272,35 +300,37 @@
 <body>
 
 <div class="container">
-    <div class="status-badge-container">
+    <div class="status-badge-container reveal">
         <div class="status-badge">
             <span class="pulse-dot"></span>
             Серверы активны
         </div>
     </div>
 
-    <div class="site-header">
+    <div class="site-header reveal">
         <h1>Telegram <span class="accent">Proxy</span></h1>
         <a href="https://t.me/telegaproxys" class="tg-channel-btn">@telegaproxys</a>
     </div>
 
-    <p class="description">
+    <p class="description reveal">
         MTProto прокси для стабильного доступа к Telegram. Нажми на сервер — он откроется прямо в приложении. Отключи VPN перед подключением.
     </p>
 
-    <div class="online-panel">
-        <span>СПИСОК ДОСТУПНЫХ УЗЛОВ</span>
-        <div class="online-count">
-            <span style="font-size: 8px;">●</span> 
-            <span id="counter-val">0</span> ОНЛАЙН
+    <div id="proxy-list" class="reveal" style="animation-delay: 0.6s;">
+        <div class="list-inner-header">
+            <span>СПИСОК ДОСТУПНЫХ УЗЛОВ</span>
+            <div class="online-count">
+                <span style="font-size: 8px;">●</span> 
+                <span id="counter-val">0</span> ОНЛАЙН
+            </div>
+        </div>
+
+        <div id="proxy-items-container">
+            <div style="padding: 20px; text-align: center; color: #333; font-size: 12px;">Загрузка списка...</div>
         </div>
     </div>
 
-    <div id="proxy-list">
-        <div style="padding: 20px; text-align: center; color: #333; font-size: 12px;">Загрузка списка...</div>
-    </div>
-
-    <div class="vpn-warning">
+    <div class="vpn-warning reveal">
         <div class="info-icon">i</div>
         <div class="warning-text">
             Прокси не работает при включённом VPN. Отключи VPN перед подключением, иначе соединение не установится.
@@ -324,7 +354,8 @@
     }
 
     async function loadProxies() {
-        const list = document.getElementById('proxy-list');
+        // Мы изменили HTML-структуру, теперь список анимируется целиком, а карточки - внутри.
+        const proxyItemsContainer = document.getElementById('proxy-items-container');
         const counterVal = document.getElementById('counter-val');
         
         try {
@@ -340,20 +371,33 @@
 
             const sortedData = [...ruGroup, ...otherGroup];
             counterVal.innerText = sortedData.length;
-            list.innerHTML = '';
+            
+            // Очищаем только контейнер карточек, а не весь список с шапкой
+            proxyItemsContainer.innerHTML = '';
 
             const lastHosts = JSON.parse(localStorage.getItem('prev_hosts') || '[]');
             const currentHosts = sortedData.map(p => p.host);
 
+            // Получаем CSS-переменные для расчета задержки
+            const styles = getComputedStyle(document.documentElement);
+            const baseStaggerDelay = parseFloat(styles.getPropertyValue('--stagger-delay')) || 0.03;
+
             sortedData.slice(0, 100).forEach((p, index) => {
                 const isNew = !lastHosts.includes(p.host);
                 const isRU = p.country === 'RU';
-                const countryCode = p.country || 'UN'; // Если страны нет, пишем UN
+                const countryCode = p.country || 'UN';
                 const displayIndex = (index + 1).toString().padStart(2, '0');
                 
                 const item = document.createElement('a');
                 item.href = p.link;
                 item.className = 'proxy-item';
+                
+                // --- ГЛАВНАЯ ЧАСТЬ: Stagger Reveal ---
+                // Мы рассчитываем animation-delay для каждой карточки в зависимости от её индекса.
+                // Также добавляем небольшую задержку (0.8s), чтобы список начал появляться ПОСЛЕ шапки.
+                const revealStartDelay = 0.8; 
+                item.style.animationDelay = (revealStartDelay + (index * baseStaggerDelay)) + 's';
+                
                 item.innerHTML = `
                     <div class="proxy-number">${displayIndex}</div>
                     <div class="proxy-name">
@@ -364,13 +408,14 @@
                     <div class="geo-code">${countryCode}</div>
                     <div class="arrow">→</div>
                 `;
-                list.appendChild(item);
+                // Добавляем карточку в её контейнер
+                proxyItemsContainer.appendChild(item);
             });
 
             localStorage.setItem('prev_hosts', JSON.stringify(currentHosts));
 
         } catch (e) {
-            list.innerHTML = '<div style="padding:20px;text-align:center;color:#444;font-size:12px;">Ошибка обновления базы...</div>';
+            proxyItemsContainer.innerHTML = '<div style="padding:20px;text-align:center;color:#444;font-size:12px;">Ошибка обновления базы...</div>';
         }
     }
 
@@ -380,3 +425,4 @@
 
 </body>
 </html>
+
