@@ -14,7 +14,6 @@
             --text-dim: #777;
             --border-color: #222;
             --reveal-duration: 0.6s;
-            --stagger-delay: 0.03s;
         }
 
         @keyframes fadeInUp {
@@ -42,36 +41,39 @@
             display: flex;
             justify-content: center;
             overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* --- УСИЛЕННЫЙ ФОНОВЫЙ ГРАДИЕНТ --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            /* Сделал цвета ярче (0.15 и 0.1) и пятна больше */
+            background: 
+                radial-gradient(circle at 90% 10%, rgba(34, 197, 94, 0.15), transparent 50%),
+                radial-gradient(circle at 10% 90%, rgba(34, 197, 94, 0.12), transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.05), transparent 70%);
+            filter: blur(80px); 
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
             width: 100%;
             max-width: 420px;
+            position: relative;
         }
 
         /* --- Шапка --- */
         .status-badge-container { margin-bottom: 25px; animation-delay: 0.1s; }
         .site-header { animation-delay: 0.25s; }
         
-        .description-block { 
-            margin: 18px 0 35px 0; 
-            animation-delay: 0.4s; 
-        }
-
-        .main-desc {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.4;
-            margin-bottom: 8px;
-        }
-
-        .legend-desc {
-            color: #555; /* Чуть более приглушенный */
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .description-block { margin: 18px 0 35px 0; animation-delay: 0.4s; }
+        .main-desc { color: #666; font-size: 14px; line-height: 1.4; margin-bottom: 8px; }
+        .legend-desc { color: #555; font-size: 13px; display: flex; align-items: center; gap: 6px; }
 
         .status-badge {
             display: inline-flex; align-items: center;
@@ -111,7 +113,10 @@
         /* --- Список --- */
         #proxy-list {
             display: flex; flex-direction: column; gap: 8px;
-            background: var(--card-bg); padding: 8px;
+            /* Стеклянный эффект */
+            background: rgba(22, 22, 22, 0.7); 
+            backdrop-filter: blur(12px); 
+            padding: 8px;
             border: 1px solid var(--border-color); border-radius: 12px;
         }
 
@@ -126,7 +131,8 @@
         .online-count { color: var(--accent-green); display: flex; align-items: center; gap: 5px; }
 
         .proxy-item {
-            background: #1c1c1c; border-radius: 10px; padding: 12px;
+            background: rgba(28, 28, 28, 0.5);
+            border-radius: 10px; padding: 12px;
             display: flex; align-items: center; text-decoration: none;
             color: white; transition: 0.15s ease; border: 1px solid transparent;
             opacity: 0; animation: fadeInUp var(--reveal-duration) ease forwards;
@@ -134,8 +140,9 @@
         }
 
         .proxy-item:hover {
-            background: #222; border-color: rgba(34, 197, 94, 0.3);
-            box-shadow: 0 0 12px rgba(34, 197, 94, 0.25);
+            background: rgba(34, 197, 94, 0.08);
+            border-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.15);
         }
 
         .proxy-item:active { transform: scale(0.98); }
