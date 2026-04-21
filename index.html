@@ -41,7 +41,7 @@
             padding: 15px;
             display: flex;
             justify-content: center;
-            overflow-x: hidden; /* Защита от горизонтального скролла */
+            overflow-x: hidden;
         }
 
         .container {
@@ -52,7 +52,26 @@
         /* --- Шапка --- */
         .status-badge-container { margin-bottom: 25px; animation-delay: 0.1s; }
         .site-header { animation-delay: 0.25s; }
-        .description { color: #666; font-size: 14px; line-height: 1.4; margin: 18px 0 35px 0; animation-delay: 0.4s; }
+        
+        .description-block { 
+            margin: 18px 0 35px 0; 
+            animation-delay: 0.4s; 
+        }
+
+        .main-desc {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .legend-desc {
+            color: #555; /* Чуть более приглушенный */
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
         .status-badge {
             display: inline-flex; align-items: center;
@@ -106,13 +125,12 @@
 
         .online-count { color: var(--accent-green); display: flex; align-items: center; gap: 5px; }
 
-        /* --- Карточка прокси --- */
         .proxy-item {
             background: #1c1c1c; border-radius: 10px; padding: 12px;
             display: flex; align-items: center; text-decoration: none;
             color: white; transition: 0.15s ease; border: 1px solid transparent;
             opacity: 0; animation: fadeInUp var(--reveal-duration) ease forwards;
-            min-width: 0; /* Нужно для корректной обрезки текста в flex */
+            min-width: 0;
         }
 
         .proxy-item:hover {
@@ -124,50 +142,23 @@
 
         .proxy-number {
             background: #252525; color: #555; width: 32px; height: 32px;
-            min-width: 32px; /* Чтобы номер не сжимался */
-            display: flex; align-items: center; justify-content: center;
+            min-width: 32px; display: flex; align-items: center; justify-content: center;
             border-radius: 6px; font-size: 12px; font-weight: 800; margin-right: 12px;
         }
 
         .proxy-name { 
-            flex-grow: 1; 
-            font-size: 15px; 
-            font-weight: 600; 
-            display: flex; 
-            align-items: center;
-            white-space: nowrap; /* Не переносить на новую строку */
-            overflow: hidden;    /* Прятать всё, что не влезло */
-            text-overflow: ellipsis; /* Добавлять троеточие */
-            min-width: 0; /* Магия flexbox для обрезки текста */
+            flex-grow: 1; font-size: 15px; font-weight: 600; display: flex; align-items: center;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
         }
 
-        /* Бейджи */
         .badge-ru { opacity: 0.45; filter: saturate(0.8); font-size: 13px; margin-left: 6px; flex-shrink: 0; }
-        
-        .badge-tls { 
-            opacity: 0.35; 
-            font-size: 13px; 
-            margin-left: 6px; 
-            filter: grayscale(1); 
-            flex-shrink: 0; 
-            cursor: help;
-        }
+        .badge-tls { opacity: 0.35; font-size: 13px; margin-left: 6px; filter: grayscale(1); flex-shrink: 0; }
 
         .geo-code {
             font-size: 11px; font-weight: 800; color: #444; margin-left: 10px; margin-right: 8px;
             background: #252525; padding: 2px 5px; border-radius: 4px; flex-shrink: 0;
         }
         .arrow { color: #333; font-size: 16px; flex-shrink: 0; }
-
-        /* --- Скелетоны --- */
-        .skeleton {
-            background: #1c1c1c; border-radius: 10px; padding: 12px;
-            display: flex; align-items: center; margin-bottom: 8px;
-        }
-        .skeleton-box { animation: skeleton-pulse 1.5s infinite ease-in-out; border-radius: 4px; }
-        .sk-num { width: 32px; height: 32px; margin-right: 12px; border-radius: 6px; flex-shrink: 0; }
-        .sk-name { width: 60%; height: 16px; }
-        .sk-geo { width: 30px; height: 16px; margin-left: auto; flex-shrink: 0; }
 
         .vpn-warning {
             background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color);
@@ -187,6 +178,15 @@
             border-radius: 5px; font-size: 9px; color: #333;
             letter-spacing: 1.5px; text-transform: uppercase;
         }
+        
+        .skeleton {
+            background: #1c1c1c; border-radius: 10px; padding: 12px;
+            display: flex; align-items: center; margin-bottom: 8px;
+        }
+        .skeleton-box { animation: skeleton-pulse 1.5s infinite ease-in-out; border-radius: 4px; }
+        .sk-num { width: 32px; height: 32px; margin-right: 12px; border-radius: 6px; flex-shrink: 0; }
+        .sk-name { width: 60%; height: 16px; }
+        .sk-geo { width: 30px; height: 16px; margin-left: auto; flex-shrink: 0; }
     </style>
 </head>
 <body>
@@ -204,9 +204,14 @@
         <a href="https://t.me/telegaproxys" class="tg-channel-btn">@telegaproxys</a>
     </div>
 
-    <p class="description reveal">
-        MTProto прокси для стабильного доступа к Telegram. Нажми на сервер — он откроется прямо в приложении. Отключи VPN перед подключением.
-    </p>
+    <div class="description-block reveal">
+        <div class="main-desc">
+            MTProto прокси для стабильного доступа к Telegram. Нажми на сервер — он откроется прямо в приложении. Отключи VPN перед подключением.
+        </div>
+        <div class="legend-desc">
+            <span>👻</span> — Прокси с технологией FakeTLS
+        </div>
+    </div>
 
     <div id="proxy-list" class="reveal" style="animation-delay: 0.6s;">
         <div class="list-inner-header">
@@ -278,7 +283,6 @@
             sortedData.slice(0, 100).forEach((p, index) => {
                 const isNew = !lastHosts.includes(p.host);
                 const isRU = p.country === 'RU';
-                // ПРОВЕРКА FAKE TLS (ключ начинается на ee)
                 const isFakeTLS = p.secret && p.secret.toLowerCase().startsWith('ee');
                 const countryCode = p.country || 'UN';
                 const displayIndex = (index + 1).toString().padStart(2, '0');
@@ -293,8 +297,7 @@
                     <div class="proxy-name">
                         <span style="overflow: hidden; text-overflow: ellipsis;">${p.host}</span>
                         ${isRU ? '<span class="badge-ru">🇷🇺</span>' : ''}
-                        ${isFakeTLS ? '<span class="badge-tls" title="Fake TLS Proxy">👻</span>' : ''}
-                        ${isNew ? '<span class="badge-new" style="background:var(--accent-green);color:black;font-size:8px;padding:1px 4px;border-radius:3px;margin-left:6px;font-weight:900;flex-shrink:0;">NEW</span>' : ''}
+                        ${isFakeTLS ? '<span class="badge-tls">👻</span>' : ''}
                     </div>
                     <div class="geo-code">${countryCode}</div>
                     <div class="arrow">→</div>
