@@ -3,17 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Proxy | Premium</title>
+    <title>Telegram Proxy | Premium Experimental</title>
     <style>
         :root {
             --bg-color: #0d0d0d;
             --card-bg: #161616;
             --list-header-bg: #111111;
             --accent-green: #22c55e;
+            --accent-dark: #14532d;
             --text-main: #ffffff;
             --text-dim: #777;
             --border-color: #222;
             --reveal-duration: 0.6s;
+        }
+
+        /* --- КАСТОМНЫЙ СКРОЛЛБАР (Neon Style) --- */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1a1a1a;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-dark);
+            box-shadow: 0 0 10px var(--accent-green);
         }
 
         @keyframes fadeInUp {
@@ -45,13 +63,12 @@
             min-height: 100vh;
         }
 
-        /* --- УСИЛЕННЫЙ ФОНОВЫЙ ГРАДИЕНТ --- */
+        /* АТМОСФЕРНЫЙ ФОН */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            /* Сделал цвета ярче (0.15 и 0.1) и пятна больше */
             background: 
                 radial-gradient(circle at 90% 10%, rgba(34, 197, 94, 0.15), transparent 50%),
                 radial-gradient(circle at 10% 90%, rgba(34, 197, 94, 0.12), transparent 50%),
@@ -113,7 +130,6 @@
         /* --- Список --- */
         #proxy-list {
             display: flex; flex-direction: column; gap: 8px;
-            /* Стеклянный эффект */
             background: rgba(22, 22, 22, 0.7); 
             backdrop-filter: blur(12px); 
             padding: 8px;
@@ -134,9 +150,12 @@
             background: rgba(28, 28, 28, 0.5);
             border-radius: 10px; padding: 12px;
             display: flex; align-items: center; text-decoration: none;
-            color: white; transition: 0.15s ease; border: 1px solid transparent;
+            color: white; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
             opacity: 0; animation: fadeInUp var(--reveal-duration) ease forwards;
             min-width: 0;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .proxy-item:hover {
@@ -145,7 +164,14 @@
             box-shadow: 0 0 15px rgba(34, 197, 94, 0.15);
         }
 
-        .proxy-item:active { transform: scale(0.98); }
+        /* ВИЗУАЛЬНЫЙ ОТКЛИК ПРИ НАЖАТИИ */
+        .proxy-item:active {
+            transform: scale(0.96);
+            background: rgba(34, 197, 94, 0.15);
+            border-color: var(--accent-green);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
+            transition: 0.1s;
+        }
 
         .proxy-number {
             background: #252525; color: #555; width: 32px; height: 32px;
