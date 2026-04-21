@@ -840,32 +840,25 @@
         "link": "tg://proxy?server=195.254.165.233&port=65535&secret=eeNEgYdJvXrFGRMCIMJdCQ"
     },
     {
-        "host": "93.183.88.188",
-        "port": "443",
-        "secret": "eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D",
-        "country": "UN",
-        "link": "tg://proxy?server=93.183.88.188&port=443&secret=eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D"
-    },
-    {
-        "host": "79.143.93.219",
-        "port": "8443",
-        "secret": "ee174f8ad75b1f66755d9fef2e7a02bc987777772e676f6f676c652e636f6d",
-        "country": "UN",
-        "link": "tg://proxy?server=79.143.93.219&port=8443&secret=ee174f8ad75b1f66755d9fef2e7a02bc987777772e676f6f676c652e636f6d"
-    },
-    {
-        "host": "94.130.190.170",
-        "port": "443",
-        "secret": "dd104462821249bd7ac519130220c25d09",
-        "country": "UN",
-        "link": "tg://proxy?server=94.130.190.170&port=443&secret=dd104462821249bd7ac519130220c25d09"
-    },
-    {
         "host": "64.188.64.195",
         "port": "443",
         "secret": "f24524a119212e8d79635194dd77642d",
         "country": "UN",
         "link": "tg://proxy?server=64.188.64.195&port=443&secret=f24524a119212e8d79635194dd77642d"
+    },
+    {
+        "host": "23.88.51.230",
+        "port": "443",
+        "secret": "3QAAAAAAAAAAAAAAAAAAAAA=",
+        "country": "UN",
+        "link": "tg://proxy?server=23.88.51.230&port=443&secret=3QAAAAAAAAAAAAAAAAAAAAA="
+    },
+    {
+        "host": "87.106.137.212",
+        "port": "21212",
+        "secret": "312b91cf4831abf49809466752b9c364",
+        "country": "UN",
+        "link": "tg://proxy?server=87.106.137.212&port=21212&secret=312b91cf4831abf49809466752b9c364"
     },
     {
         "host": "65.21.184.226",
@@ -882,11 +875,11 @@
         "link": "tg://proxy?server=95.217.28.246&port=443&secret=dd104462821249bd7ac519130220c25d09"
     },
     {
-        "host": "87.106.137.212",
-        "port": "21212",
-        "secret": "312b91cf4831abf49809466752b9c364",
+        "host": "94.130.190.170",
+        "port": "443",
+        "secret": "dd104462821249bd7ac519130220c25d09",
         "country": "UN",
-        "link": "tg://proxy?server=87.106.137.212&port=21212&secret=312b91cf4831abf49809466752b9c364"
+        "link": "tg://proxy?server=94.130.190.170&port=443&secret=dd104462821249bd7ac519130220c25d09"
     },
     {
         "host": "syntax.ddnscdn.sbs.",
@@ -896,11 +889,18 @@
         "link": "tg://proxy?server=syntax.ddnscdn.sbs.&port=443&secret=ee0000f00f0f775555fffffff5006e2e696d656469612e737465616d706f77657265642e636f6d"
     },
     {
-        "host": "23.88.51.230",
-        "port": "443",
-        "secret": "3QAAAAAAAAAAAAAAAAAAAAA=",
+        "host": "79.143.93.219",
+        "port": "8443",
+        "secret": "ee174f8ad75b1f66755d9fef2e7a02bc987777772e676f6f676c652e636f6d",
         "country": "UN",
-        "link": "tg://proxy?server=23.88.51.230&port=443&secret=3QAAAAAAAAAAAAAAAAAAAAA="
+        "link": "tg://proxy?server=79.143.93.219&port=8443&secret=ee174f8ad75b1f66755d9fef2e7a02bc987777772e676f6f676c652e636f6d"
+    },
+    {
+        "host": "93.183.88.188",
+        "port": "443",
+        "secret": "eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D",
+        "country": "UN",
+        "link": "tg://proxy?server=93.183.88.188&port=443&secret=eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D"
     },
     {
         "host": "Q4.opt-meli.info",
