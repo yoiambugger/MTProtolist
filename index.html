@@ -36,6 +36,12 @@
             50% { transform: translate(-10vw, 20vh) scale(0.95); }
             100% { transform: translate(0, 0) scale(1); }
         }
+        /* Добавил вторую анимацию для разнообразия движения тумана */
+        @keyframes float-alt {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(15vw, -15vh) scale(1.1); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
         @keyframes pulse {
             0% { transform: scale(1); opacity: 0.8; }
             100% { transform: scale(2.5); opacity: 0; }
@@ -60,12 +66,23 @@
         .bg-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; pointer-events: none; }
         .blob {
             position: absolute;
-            background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 80%);
+            /* Слегка увеличил плотность цвета: было 0.15, стало 0.22 */
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.22) 0%, transparent 80%);
             filter: blur(120px); 
             animation: float-slow 40s infinite alternate ease-in-out;
+            will-change: transform;
         }
+        
+        /* 9 густых капель тумана */
         .blob:nth-child(1) { width: 500px; height: 500px; left: -100px; top: -100px; }
-        .blob:nth-child(2) { width: 600px; height: 600px; right: -100px; bottom: -100px; animation-duration: 30s; }
+        .blob:nth-child(2) { width: 600px; height: 600px; right: -100px; bottom: -100px; animation-duration: 30s; animation-name: float-alt; }
+        .blob:nth-child(3) { width: 450px; height: 450px; left: -150px; top: 60%; animation-duration: 35s; }
+        .blob:nth-child(4) { width: 550px; height: 550px; left: 55%; top: 55%; animation-duration: 45s; animation-name: float-alt; opacity: 0.8; }
+        .blob:nth-child(5) { width: 400px; height: 400px; left: 30%; top: 30%; animation-duration: 25s; }
+        .blob:nth-child(6) { width: 700px; height: 700px; left: -5%; top: 75%; animation-duration: 42s; animation-name: float-alt; opacity: 0.65; }
+        .blob:nth-child(7) { width: 480px; height: 480px; left: 75%; top: 15%; animation-duration: 28s; opacity: 0.8; }
+        .blob:nth-child(8) { width: 650px; height: 650px; left: 35%; top: -80px; animation-duration: 38s; animation-name: float-alt; opacity: 0.7; }
+        .blob:nth-child(9) { width: 520px; height: 520px; left: 65%; top: 85%; animation-duration: 33s; opacity: 0.75; }
 
         .container { width: 100%; max-width: 420px; position: relative; }
 
@@ -171,7 +188,15 @@
 <body>
 
 <div class="bg-blobs">
-    <div class="blob"></div><div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
 </div>
 
 <div class="container">
