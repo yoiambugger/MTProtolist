@@ -6,14 +6,14 @@
     <title>Telegram proxy | @telegaproxys</title>
     <style>
         :root {
-            --bg-color: #050505; /* Чуть темнее, чтобы неон лучше смотрелся */
-            --card-bg: rgba(22, 22, 22, 0.7); /* Полупрозрачность для эффекта стекла */
+            --bg-color: #050505;
+            --card-bg: rgba(22, 22, 22, 0.7);
             --list-header-bg: #111111;
             --accent-green: #22c55e;
             --accent-dark: #14532d;
             --text-main: #ffffff;
-            --text-dim: #777;
-            --border-color: #222;
+            --text-dim: #777; /* Тот самый цвет из оригинального кода */
+            --border-color: #222; /* Тот самый серый бордер */
             --reveal-duration: 0.6s;
         }
 
@@ -25,344 +25,295 @@
             border-radius: 10px;
             border: 1px solid var(--border-color);
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-dark);
-            box-shadow: 0 0 10px var(--accent-green);
-        }
 
         /* --- АНИМАЦИИ --- */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Медленное, тягучее плавание (лавовая лампа) */
         @keyframes float-slow {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            25% { transform: translate(15vw, -15vh) scale(1.1) rotate(90deg); }
-            50% { transform: translate(-10vw, 20vh) scale(0.95) rotate(180deg); }
-            75% { transform: translate(10vw, -10vh) scale(1.05) rotate(270deg); }
-            100% { transform: translate(0, 0) scale(1) rotate(360deg); }
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-10vw, 20vh) scale(0.95); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) skewX(-25deg); }
+            100% { transform: translateX(250%) skewX(-25deg); }
         }
 
-        /* Среднее плавание для разнообразия */
-        @keyframes float-medium {
-            0% { transform: translate(10vw, 10vh) scale(1); }
-            33% { transform: translate(-20vw, -10vh) scale(1.1); }
-            66% { transform: translate(15vw, -20vh) scale(0.9); }
-            100% { transform: translate(10vw, 10vh) scale(1); }
-        }
-
-        .reveal {
-            opacity: 0;
-            animation: fadeInUp var(--reveal-duration) ease forwards;
-        }
+        .reveal { opacity: 0; animation: fadeInUp var(--reveal-duration) ease forwards; }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
+            margin: 0; padding: 15px;
+            display: flex; justify-content: center;
+            overflow-x: hidden; position: relative; min-height: 100vh;
         }
 
-        /* --- ДИНАМИЧНЫЙ НЕОНОВЫЙ ФОН (Lava Lamp Edition) --- */
-        .bg-blobs {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; overflow: hidden; pointer-events: none;
-        }
-        
+        /* --- ФОН --- */
+        .bg-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; pointer-events: none; }
         .blob {
             position: absolute;
-            background: radial-gradient(circle, rgba(34, 197, 94, 0.18) 0%, transparent 80%);
-            /* Огромный блюр убирает все очертания */
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 80%);
             filter: blur(120px); 
-            animation: float-slow infinite alternate ease-in-out;
-            will-change: transform; /* Оптимизация для плавности */
+            animation: float-slow 40s infinite alternate ease-in-out;
         }
-        
-        /* 5 больших, тягучих капель */
-        .blob:nth-child(1) { width: 500px; height: 500px; left: -100px; top: -100px; animation-duration: 40s; opacity: 0.9; }
-        .blob:nth-child(2) { width: 600px; height: 600px; left: 60%; top: -150px; animation-duration: 30s; animation-name: float-medium; opacity: 0.7; }
-        .blob:nth-child(3) { width: 450px; height: 450px; left: -150px; top: 60%; animation-duration: 35s; opacity: 0.8; }
-        .blob:nth-child(4) { width: 550px; height: 550px; left: 55%; top: 55%; animation-duration: 45s; animation-name: float-slow; opacity: 0.75; }
-        .blob:nth-child(5) { width: 400px; height: 400px; left: 30%; top: 30%; animation-duration: 25s; animation-name: float-medium; opacity: 0.85; }
+        .blob:nth-child(1) { width: 500px; height: 500px; left: -100px; top: -100px; }
+        .blob:nth-child(2) { width: 600px; height: 600px; right: -100px; bottom: -100px; animation-duration: 30s; }
 
-        .container {
-            width: 100%;
-            max-width: 420px;
-            position: relative;
-        }
+        .container { width: 100%; max-width: 420px; position: relative; }
 
-        /* --- Шапка --- */
-        .status-badge-container { margin-bottom: 25px; animation-delay: 0.1s; }
-        .site-header { animation-delay: 0.25s; }
-        
-        .description-block { margin: 18px 0 35px 0; animation-delay: 0.4s; }
-        .main-desc { color: #666; font-size: 14px; line-height: 1.4; margin-bottom: 8px; }
-        .legend-desc { color: #555; font-size: 13px; display: flex; align-items: center; gap: 6px; }
-
+        /* --- ШАПКА --- */
+        .status-badge-container { margin-bottom: 25px; margin-top: 10px; }
         .status-badge {
             display: inline-flex; align-items: center;
-            background: rgba(34, 197, 94, 0.07);
-            border: 1px solid rgba(34, 197, 94, 0.15);
-            padding: 5px 12px; border-radius: 20px;
-            font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+            background: rgba(34, 197, 94, 0.07); border: 1px solid rgba(34, 197, 94, 0.15);
+            padding: 5px 12px; border-radius: 20px; font-size: 10px; font-weight: 700;
             color: var(--accent-green); text-transform: uppercase;
         }
+        .pulse-dot { width: 7px; height: 7px; background-color: var(--accent-green); border-radius: 50%; margin-right: 8px; position: relative; }
+        .pulse-dot::after { content: ""; position: absolute; width: 100%; height: 100%; background-color: var(--accent-green); border-radius: 50%; animation: pulse 2s infinite; }
 
-        .pulse-dot {
-            width: 7px; height: 7px; background-color: var(--accent-green);
-            border-radius: 50%; margin-right: 8px; position: relative;
-        }
-        .pulse-dot::after {
-            content: ""; position: absolute; width: 100%; height: 100%;
-            background-color: var(--accent-green); border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(2.5); opacity: 0; }
-        }
-
-        .site-header h1 { font-size: 38px; margin: 0; font-weight: 800; line-height: 1; }
+        .site-header h1 { font-size: 38px; margin: 0; font-weight: 800; line-height: 1; color: #fff; }
         .site-header .accent { color: var(--accent-green); display: block; }
 
-        .tg-channel-btn {
+        .header-btns { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-ui {
             display: inline-flex; align-items: center; background: #1a1a1a;
             color: #efefef; text-decoration: none; padding: 8px 15px;
             border-radius: 10px; font-size: 13px; font-weight: 600;
-            margin-top: 15px; border: 1px solid var(--border-color); transition: 0.2s;
+            border: 1px solid var(--border-color); transition: 0.2s; cursor: pointer;
         }
-        .tg-channel-btn:hover { border-color: var(--accent-green); background: #222; }
+        .btn-ui:hover { border-color: var(--accent-green); background: #222; }
+        .btn-ui.active { border-color: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
 
-        /* --- Список --- */
-        #proxy-list {
+        .description-block { margin: 18px 0 35px 0; color: var(--text-dim); }
+        .main-desc { font-size: 14px; line-height: 1.4; margin-bottom: 8px; }
+        .legend-desc { font-size: 13px; display: flex; align-items: center; gap: 6px; color: #555; }
+
+        /* --- СПИСКИ --- */
+        #proxy-list, .status-container {
             display: flex; flex-direction: column; gap: 8px;
-            background: var(--card-bg); 
-            backdrop-filter: blur(12px); /* Блюр сквозь таблицу */
-            padding: 8px;
-            border: 1px solid var(--border-color); border-radius: 12px;
+            background: var(--card-bg); backdrop-filter: blur(12px);
+            padding: 8px; border: 1px solid var(--border-color); border-radius: 12px;
         }
 
         .list-inner-header {
             background: var(--list-header-bg); border-bottom: 1px solid var(--border-color);
-            padding: 10px 18px; margin: -8px -8px 0 -8px;
-            border-radius: 12px 12px 0 0; font-size: 11px;
-            color: var(--text-dim); font-weight: 700;
+            padding: 10px 18px; margin: -8px -8px 0 -8px; border-radius: 12px 12px 0 0;
+            font-size: 11px; color: var(--text-dim); font-weight: 700;
             display: flex; align-items: center; justify-content: space-between;
         }
 
-        .online-count { color: var(--accent-green); display: flex; align-items: center; gap: 5px; }
-
-        .proxy-item {
-            background: rgba(28, 28, 28, 0.4);
-            border-radius: 10px; padding: 12px;
-            display: flex; align-items: center; text-decoration: none;
-            color: white; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid transparent;
+        .proxy-item, .status-card {
+            background: rgba(28, 28, 28, 0.4); border-radius: 10px; padding: 12px;
+            display: flex; align-items: center; text-decoration: none; color: #fff;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid transparent;
             opacity: 0; animation: fadeInUp var(--reveal-duration) ease forwards;
-            min-width: 0;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+            position: relative; overflow: hidden;
         }
-
-        .proxy-item:hover {
-            background: rgba(34, 197, 94, 0.08);
-            border-color: rgba(34, 197, 94, 0.4);
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.15);
-        }
-
-        .proxy-item:active {
-            transform: scale(0.96);
-            background: rgba(34, 197, 94, 0.2);
-            border-color: var(--accent-green);
-            box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
-            transition: 0.1s;
+        
+        .proxy-item:active, .status-card:active {
+            transform: scale(0.96); background: rgba(34, 197, 94, 0.2);
+            border-color: var(--accent-green); box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
         }
 
         .proxy-number {
             background: #252525; color: #555; width: 32px; height: 32px;
-            min-width: 32px; display: flex; align-items: center; justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             border-radius: 6px; font-size: 12px; font-weight: 800; margin-right: 12px;
         }
 
-        .proxy-name { 
-            flex-grow: 1; font-size: 15px; font-weight: 600; display: flex; align-items: center;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+        .proxy-name { flex-grow: 1; font-size: 15px; font-weight: 600; display: flex; align-items: center; overflow: hidden; color: #fff; }
+
+        /* ГЕО И СТРЕЛКИ ТЕМНЫЕ */
+        .geo-tag { font-size: 11px; font-weight: 800; color: #444; background: #252525; padding: 2px 5px; border-radius: 4px; margin-left: 10px; }
+        .arrow-ui { color: #333; margin-left: 8px; font-size: 16px; }
+
+        /* СТАТУС ВИД */
+        .status-card { border-radius: 12px; padding: 14px; }
+        .status-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 40%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+            transform: skewX(-25deg); pointer-events: none;
         }
+        .status-card:hover::before { animation: shine 0.7s forwards; }
 
-        /* ПЛАШКА NEW */
-        .badge-new {
-            background: var(--accent-green);
-            color: black; font-size: 8px; font-weight: 900; padding: 2px 5px; border-radius: 4px;
-            margin-left: 8px; flex-shrink: 0; box-shadow: 0 0 10px var(--accent-green);
-        }
+        .real-dot { width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; margin-right: 6px; box-shadow: 0 0 6px var(--accent-green); }
 
-        .badge-ru { opacity: 0.45; filter: saturate(0.8); font-size: 13px; margin-left: 6px; flex-shrink: 0; }
-        .badge-tls { opacity: 0.35; font-size: 13px; margin-left: 6px; filter: grayscale(1); flex-shrink: 0; }
+        .signal-bars { display: flex; align-items: flex-end; gap: 3px; height: 14px; margin-right: 10px; }
+        .bar { width: 4px; border-radius: 1.5px; background: #222; }
+        .bar-1 { height: 5px; } .bar-2 { height: 9px; } .bar-3 { height: 14px; }
+        .bar.active { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+        .ping-txt { font-size: 12px; color: var(--text-dim); font-weight: 700; width: 50px; text-align: right; }
 
-        .geo-code {
-            font-size: 11px; font-weight: 800; color: #444; margin-left: 10px; margin-right: 8px;
-            background: #252525; padding: 2px 5px; border-radius: 4px; flex-shrink: 0;
-        }
-        .arrow { color: #333; font-size: 16px; flex-shrink: 0; }
-
+        /* ПЛАШКА VPN */
         .vpn-warning {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-color);
             border-radius: 12px; padding: 15px; display: flex; gap: 12px;
-            margin-top: 25px; animation-delay: 0.5s;
+            margin-top: 30px; align-items: center;
         }
-        .info-icon {
-            background: #222; width: 20px; height: 20px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 10px; color: #555; flex-shrink: 0;
-        }
+        .info-icon { background: #222; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #555; flex-shrink: 0; }
         .warning-text { color: #555; font-size: 12px; line-height: 1.4; }
 
-        .footer-tag { text-align: center; margin-top: 25px; padding-bottom: 20px; }
-        .mtproto-label {
-            display: inline-block; border: 1px solid #222; padding: 3px 10px;
-            border-radius: 5px; font-size: 9px; color: #333;
-            letter-spacing: 1.5px; text-transform: uppercase;
-        }
-        
-        .skeleton {
-            background: #1c1c1c; border-radius: 10px; padding: 12px;
-            display: flex; align-items: center; margin-bottom: 8px;
-        }
+        .footer-tag { text-align: center; margin-top: 30px; padding-bottom: 20px; }
+        .mtproto-label { display: inline-block; border: 1px solid #222; padding: 3px 10px; border-radius: 5px; font-size: 9px; color: #333; letter-spacing: 1.5px; text-transform: uppercase; }
+
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
 <div class="bg-blobs">
-    <div class="blob"></div>
-    <div class="blob"></div>
-    <div class="blob"></div>
-    <div class="blob"></div>
-    <div class="blob"></div>
+    <div class="blob"></div><div class="blob"></div>
 </div>
 
 <div class="container">
     <div class="status-badge-container reveal">
-        <div class="status-badge">
-            <span class="pulse-dot"></span>
-            Серверы активны
-        </div>
+        <div class="status-badge"><span class="pulse-dot"></span>Серверы активны</div>
     </div>
 
     <div class="site-header reveal">
-        <h1>Telegram <span class="accent">Proxy</span></h1>
-        <a href="https://t.me/telegaproxys" class="tg-channel-btn">@telegaproxys</a>
-    </div>
-
-    <div class="description-block reveal">
-        <div class="main-desc">
-            MTProto прокси для стабильного доступа к Telegram. Нажми на сервер — он откроется прямо в приложении. Отключи VPN перед подключением.
-        </div>
-        <div class="legend-desc">
-            <span>👻</span> — Прокси с технологией FakeTLS
+        <h1 id="main-title">Telegram <span class="accent">Proxy</span></h1>
+        <div class="header-btns">
+            <a href="https://t.me/telegaproxys" class="btn-ui">@telegaproxys</a>
+            <div id="toggle-btn" class="btn-ui">Servers Status</div>
         </div>
     </div>
 
-    <div id="proxy-list" class="reveal" style="animation-delay: 0.6s;">
-        <div class="list-inner-header">
-            <span>СПИСОК ДОСТУПНЫХ УЗЛОВ</span>
-            <div class="online-count">
-                <span style="font-size: 8px;">●</span> 
-                <span id="counter-val">...</span> ОНЛАЙН
-            </div>
+    <div id="view-list">
+        <div class="description-block reveal">
+            <div class="main-desc">MTProto прокси для стабильного доступа к Telegram. Нажми на сервер — он откроется прямо в приложении.</div>
+            <div class="legend-desc"><span>👻</span> — Прокси с технологией FakeTLS</div>
         </div>
-
-        <div id="proxy-items-container">
+        <div id="proxy-list" class="reveal">
+            <div class="list-inner-header">
+                <span>СПИСОК ДОСТУПНЫХ УЗЛОВ</span>
+                <div style="color:var(--accent-green); display:flex; align-items:center; gap:5px;">
+                    <span style="font-size:8px;">●</span> <span id="online-count">...</span> ОНЛАЙН
+                </div>
             </div>
+            <div id="list-container"></div>
+        </div>
+    </div>
+
+    <div id="view-status" class="hidden">
+        <div style="margin: 20px 0; font-size: 11px; color: var(--text-dim); font-weight: 700;">ОБНОВЛЯЕТСЯ АВТОМАТИЧЕСКИ</div>
+        <div id="status-container"></div>
     </div>
 
     <div class="vpn-warning reveal">
         <div class="info-icon">i</div>
-        <div class="warning-text">
-            Прокси не работает при включённом VPN. Отключи VPN перед подключением.
-        </div>
+        <div class="warning-text">Прокси не работает при включённом VPN. Отключи VPN перед подключением.</div>
     </div>
 
-    <div class="footer-tag">
+    <div class="footer-tag reveal">
         <div class="mtproto-label">MTPROTO</div>
     </div>
 </div>
 
 <script>
     const JSON_URL = 'https://raw.githubusercontent.com/yoiambugger/MTProtolist/main/data.json';
+    let isStatusView = false;
 
-    function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+    const toggleBtn = document.getElementById('toggle-btn');
+    const viewList = document.getElementById('view-list');
+    const viewStatus = document.getElementById('view-status');
+    const mainTitle = document.getElementById('main-title');
+
+    toggleBtn.onclick = () => {
+        isStatusView = !isStatusView;
+        if (isStatusView) {
+            viewList.classList.add('hidden');
+            viewStatus.classList.remove('hidden');
+            mainTitle.innerHTML = 'Server <span class="accent">Status</span>';
+            toggleBtn.innerText = 'Back to List';
+        } else {
+            viewList.classList.remove('hidden');
+            viewStatus.classList.add('hidden');
+            mainTitle.innerHTML = 'Telegram <span class="accent">Proxy</span>';
+            toggleBtn.innerText = 'Servers Status';
         }
-        return array;
+    };
+
+    function shuffle(a) {
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
     }
 
-    async function loadProxies() {
-        const container = document.getElementById('proxy-items-container');
-        const counterVal = document.getElementById('counter-val');
-        
+    async function loadData() {
         try {
             const res = await fetch(JSON_URL + '?t=' + Date.now());
-            if (!res.ok) throw new Error();
-            const data = await res.json();
+            const rawData = await res.json();
             
-            let ruGroup = data.filter(p => p.country === 'RU');
-            let otherGroup = data.filter(p => p.country !== 'RU');
-            ruGroup = shuffle(ruGroup);
-            otherGroup = shuffle(otherGroup);
-            const sortedData = [...ruGroup, ...otherGroup];
-
-            counterVal.innerText = sortedData.length;
-            container.innerHTML = '';
-
-            const lastHosts = JSON.parse(localStorage.getItem('prev_hosts') || '[]');
-            const currentHosts = sortedData.map(p => p.host);
-
-            sortedData.forEach((p, index) => {
-                const isNew = !lastHosts.includes(p.host);
-                const isRU = p.country === 'RU';
-                const isFakeTLS = p.secret && p.secret.toLowerCase().startsWith('ee');
-                const countryCode = p.country || 'UN';
-                const displayIndex = (index + 1).toString().padStart(2, '0');
-                
+            // ЕДИНАЯ ПЕРЕМЕШКА
+            const shuffledData = shuffle([...rawData]);
+            
+            // Список
+            const listCont = document.getElementById('list-container');
+            document.getElementById('online-count').innerText = shuffledData.length;
+            listCont.innerHTML = '';
+            shuffledData.forEach((p, i) => {
                 const item = document.createElement('a');
                 item.href = p.link;
                 item.className = 'proxy-item';
-                item.style.animationDelay = (0.7 + (index * 0.02)) + 's';
-                
+                item.style.animationDelay = (0.2 + (i * 0.02)) + 's';
                 item.innerHTML = `
-                    <div class="proxy-number">${displayIndex}</div>
+                    <div class="proxy-number">${(i+1).toString().padStart(2,'0')}</div>
                     <div class="proxy-name">
-                        <span style="overflow: hidden; text-overflow: ellipsis;">${p.host}</span>
-                        ${isRU ? '<span class="badge-ru">🇷🇺</span>' : ''}
-                        ${isFakeTLS ? '<span class="badge-tls">👻</span>' : ''}
-                        ${isNew ? '<span class="badge-new">NEW</span>' : ''}
+                        <span>${p.host}</span>
+                        ${p.country === 'RU' ? '<span style="margin-left:6px; opacity:0.4;">🇷🇺</span>' : ''}
+                        ${p.secret?.startsWith('ee') ? '<span style="margin-left:6px; opacity:0.3;">👻</span>' : ''}
                     </div>
-                    <div class="geo-code">${countryCode}</div>
-                    <div class="arrow">→</div>
+                    <div class="geo-tag">${p.country || 'UN'}</div>
+                    <div class="arrow-ui">→</div>
                 `;
-                container.appendChild(item);
+                listCont.appendChild(item);
             });
 
-            localStorage.setItem('prev_hosts', JSON.stringify(currentHosts));
-        } catch (e) {
-            container.innerHTML = '<div style="padding:20px;text-align:center;color:#444;font-size:12px;">Ошибка сети...</div>';
-        }
+            // Статус
+            const statusCont = document.getElementById('status-container');
+            statusCont.innerHTML = '';
+            shuffledData.forEach((p, i) => {
+                const ping = p.ping || 0;
+                const pingDisp = ping ? `${ping} ms` : 'Wait...';
+                const sItem = document.createElement('a');
+                sItem.href = p.link;
+                sItem.className = 'status-card';
+                sItem.style.animationDelay = (i * 0.05) + 's';
+                sItem.innerHTML = `
+                    <div class="proxy-name">
+                        <div>
+                            <div>${p.host}</div>
+                            <div style="font-size:9px; color:var(--accent-green); margin-top:2px; display:flex; align-items:center;">
+                                <div class="real-dot"></div> ONLINE
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center;">
+                        <div class="signal-bars">
+                            <div class="bar bar-1 active"></div>
+                            <div class="bar bar-2 ${ping < 600 || !ping ? 'active' : ''}"></div>
+                            <div class="bar bar-3 ${ping < 300 || !ping ? 'active' : ''}"></div>
+                        </div>
+                        <div class="ping-txt">${pingDisp}</div>
+                    </div>
+                `;
+                statusCont.appendChild(sItem);
+            });
+        } catch (e) {}
     }
-
-    loadProxies();
-    setInterval(loadProxies, 300000); 
+    loadData();
+    setInterval(loadData, 300000);
 </script>
-
 </body>
 </html>
