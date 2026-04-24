@@ -9,7 +9,7 @@ SOURCES = [
     'https://raw.githubusercontent.com/SoliSpirit/mtproto/master/all_proxies.txt',
     'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_all.txt',
     'https://raw.githubusercontent.com/Argh94/Proxy-List/main/MTProto.txt',
-    'СЮДА_ВСТАВЬ_ССЫЛКУ_НА_ТВОЙ_НОВЫЙ_ПАРСЕР' # <--- Вот сюда вставь ссылку на свой новый источник
+    'https://raw.githubusercontent.com/yoiambugger/mtproto-hunter/refs/heads/main/proxy_all.txt'
 ]
 
 def measure_ping(host, port):
