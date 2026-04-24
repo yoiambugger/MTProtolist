@@ -8,7 +8,8 @@ import socket
 SOURCES = [
     'https://raw.githubusercontent.com/SoliSpirit/mtproto/master/all_proxies.txt',
     'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_all.txt',
-    'https://raw.githubusercontent.com/Argh94/Proxy-List/main/MTProto.txt'
+    'https://raw.githubusercontent.com/Argh94/Proxy-List/main/MTProto.txt',
+    'СЮДА_ВСТАВЬ_ССЫЛКУ_НА_ТВОЙ_НОВЫЙ_ПАРСЕР' # <--- Вот сюда вставь ссылку на свой новый источник
 ]
 
 def measure_ping(host, port):
@@ -50,6 +51,7 @@ def main():
             print(f"Ошибка источника {url}: {e}")
             continue
 
+    # Вот эта строчка автоматически удаляет все дубликаты со всех источников
     unique_links = list(set(all_raw_links))
     print(f"Уникальных кандидатов: {len(unique_links)}")
     
