@@ -1,195 +1,27 @@
 [
   {
-    "host": "2.27.12.116",
+    "host": "193.109.120.106",
     "port": "443",
-    "secret": "ee19130c695cf699d93f5a31ecf380d4426d742e736b6f746f62617a2e7275",
-    "link": "tg://proxy?server=2.27.12.116&port=443&secret=ee19130c695cf699d93f5a31ecf380d4426d742e736b6f746f62617a2e7275",
-    "country": "US",
-    "ping": 151
+    "secret": "ee100404ff0f48064fffffff9001b8696d696d656469612e737465616d706f77657265642e636f6d",
+    "link": "tg://proxy?server=193.109.120.106&port=443&secret=ee100404ff0f48064fffffff9001b8696d696d656469612e737465616d706f77657265642e636f6d",
+    "country": "UN",
+    "ping": 111
   },
   {
-    "host": "109.236.50.155",
-    "port": "443",
-    "secret": "ee7777772e676f6f676c652e636f6db0",
-    "link": "tg://proxy?server=109.236.50.155&port=443&secret=ee7777772e676f6f676c652e636f6db0",
-    "country": "NL",
-    "ping": 148
-  },
-  {
-    "host": "185.182.82.73",
-    "port": "443",
-    "secret": "ee586cb8c65dc8c78f50bd4e573ae25f4873332e616d617a6f6e6177732e636f6d",
-    "link": "tg://proxy?server=185.182.82.73&port=443&secret=ee586cb8c65dc8c78f50bd4e573ae25f4873332e616d617a6f6e6177732e636f6d",
-    "country": "NL",
-    "ping": 149
-  },
-  {
-    "host": "syntax.ddnscdn.sbs.",
-    "port": "443",
-    "secret": "ee0000f00f0f775555fffffff5006e2e696d656469612e737465616d706f77657265642e636f6d",
-    "link": "tg://proxy?server=syntax.ddnscdn.sbs.&port=443&secret=ee0000f00f0f775555fffffff5006e2e696d656469612e737465616d706f77657265642e636f6d",
-    "country": "DE",
-    "ping": 182
-  },
-  {
-    "host": "hl.routefastnet.online",
-    "port": "443",
-    "secret": "eea9a5f5674069d982088b5ad27dca4584686c2e726f757465666173746e65742e6f6e6c696e65",
-    "link": "tg://proxy?server=hl.routefastnet.online&port=443&secret=eea9a5f5674069d982088b5ad27dca4584686c2e726f757465666173746e65742e6f6e6c696e65",
-    "country": "NL",
-    "ping": 177
-  },
-  {
-    "host": "195.254.165.233",
-    "port": "65535",
-    "secret": "eeNEgYdJvXrFGRMCIMJdCQ",
-    "link": "tg://proxy?server=195.254.165.233&port=65535&secret=eeNEgYdJvXrFGRMCIMJdCQ",
-    "country": "FR",
-    "ping": 1192
-  },
-  {
-    "host": "server3.mtproxygram.lol",
-    "port": "443",
-    "secret": "ee16ac683c4467cde70a6418a71571c67a62726f777365722e79616e6465782e636f6d",
-    "link": "tg://proxy?server=server3.mtproxygram.lol&port=443&secret=ee16ac683c4467cde70a6418a71571c67a62726f777365722e79616e6465782e636f6d",
-    "country": "PL",
-    "ping": 333
-  },
-  {
-    "host": "87.229.100.198",
-    "port": "8888",
-    "secret": "eeNEgYdJvXrFGRMCIMJdCQ)[پروکسی",
-    "link": "tg://proxy?server=87.229.100.198&port=8888&secret=eeNEgYdJvXrFGRMCIMJdCQ)[پروکسی",
-    "country": "NL",
-    "ping": 144
-  },
-  {
-    "host": "mtproxy.nbdays.pw",
-    "port": "9443",
-    "secret": "44ae73e20c9614efbcb0cf87b4b31b41",
-    "link": "tg://proxy?server=mtproxy.nbdays.pw&port=9443&secret=44ae73e20c9614efbcb0cf87b4b31b41",
-    "country": "NL",
-    "ping": 565
-  },
-  {
-    "host": "116.203.134.165",
-    "port": "443",
-    "secret": "ee636c6f7564666c6172652e636f6db6",
-    "link": "tg://proxy?server=116.203.134.165&port=443&secret=ee636c6f7564666c6172652e636f6db6",
-    "country": "DE",
-    "ping": 155
-  },
-  {
-    "host": "95.217.235.33",
-    "port": "443",
-    "secret": "dd104462821249bd7ac519130220c25d09",
-    "link": "tg://proxy?server=95.217.235.33&port=443&secret=dd104462821249bd7ac519130220c25d09",
-    "country": "FI",
-    "ping": 175
-  },
-  {
-    "host": "mtp.webvirt.cloud",
-    "port": "443",
-    "secret": "ee938dd87467bc49301de2e9765cf20f4374656c2e776562766972742e636c6f7564",
-    "link": "tg://proxy?server=mtp.webvirt.cloud&port=443&secret=ee938dd87467bc49301de2e9765cf20f4374656c2e776562766972742e636c6f7564",
-    "country": "US",
-    "ping": 162
-  },
-  {
-    "host": "158.220.114.142",
-    "port": "443",
-    "secret": "ee83c163668f959b994d7106de3c36672d636c6f7564666c6172652e636f6d",
-    "link": "tg://proxy?server=158.220.114.142&port=443&secret=ee83c163668f959b994d7106de3c36672d636c6f7564666c6172652e636f6d",
-    "country": "FR",
-    "ping": 152
-  },
-  {
-    "host": "212.34.154.203",
-    "port": "443",
-    "secret": "eecBAgABAAfwAwOG4kw63QAAAARueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29t",
-    "link": "tg://proxy?server=212.34.154.203&port=443&secret=eecBAgABAAfwAwOG4kw63QAAAARueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29t",
-    "country": "NL",
-    "ping": 146
-  },
-  {
-    "host": "3.3pita.com",
+    "host": "195.254.165.253",
     "port": "25565",
-    "secret": "dd79e344818749bd7ac519130220c25d09)**",
-    "link": "tg://proxy?server=3.3pita.com&port=25565&secret=dd79e344818749bd7ac519130220c25d09)**",
-    "country": "CA",
-    "ping": 330
+    "secret": "dd79e344818749bd7ac519130220c25d09",
+    "link": "tg://proxy?server=195.254.165.253&port=25565&secret=dd79e344818749bd7ac519130220c25d09",
+    "country": "FR",
+    "ping": 94
   },
   {
-    "host": "ak.yourline.online",
+    "host": "91.99.199.17",
     "port": "443",
-    "secret": "eed74b20f8b196edebcfdc6de8c8985d60616b2e796f75726c696e652e6f6e6c696e65",
-    "link": "tg://proxy?server=ak.yourline.online&port=443&secret=eed74b20f8b196edebcfdc6de8c8985d60616b2e796f75726c696e652e6f6e6c696e65",
-    "country": "NL",
-    "ping": 161
-  },
-  {
-    "host": "172.65.117.172",
-    "port": "22",
-    "secret": "dd79e344818749bd7ac519130220c25d09)__",
-    "link": "tg://proxy?server=172.65.117.172&port=22&secret=dd79e344818749bd7ac519130220c25d09)__",
-    "country": "CA",
-    "ping": 1
-  },
-  {
-    "host": "89.125.113.155",
-    "port": "443",
-    "secret": "ee67af7b545eb72c3c47fc2ccb74aa41c979616e6465782e7275",
-    "link": "tg://proxy?server=89.125.113.155&port=443&secret=ee67af7b545eb72c3c47fc2ccb74aa41c979616e6465782e7275",
+    "secret": "7gD_AA___wD_9VVf______VtZWRpYS5zdGVhbXBvd2VyZWQuY29t",
+    "link": "tg://proxy?server=91.99.199.17&port=443&secret=7gD_AA___wD_9VVf______VtZWRpYS5zdGVhbXBvd2VyZWQuY29t",
     "country": "DE",
-    "ping": 188
-  },
-  {
-    "host": "5.35.46.6",
-    "port": "443",
-    "secret": "eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D",
-    "link": "tg://proxy?server=5.35.46.6&port=443&secret=eed77db43ee3721f0fcb40a4ff63b5cd276D656469612E737465616D706F77657265642E636F6D",
-    "country": "NL",
-    "ping": 154
-  },
-  {
-    "host": "germany.nuremberg.ir.",
-    "port": "443",
-    "secret": "ee0000f00f0f775555fffffff5006e2e696D656469612E737465616D706F77657265642E636F6D",
-    "link": "tg://proxy?server=germany.nuremberg.ir.&port=443&secret=ee0000f00f0f775555fffffff5006e2e696D656469612E737465616D706F77657265642E636F6D",
-    "country": "DE",
-    "ping": 399
-  },
-  {
-    "host": "proxy.fluxoria.it.com",
-    "port": "443",
-    "secret": "ee307242dd41275c771f40035565d0750a70726f78792e666c75786f7269612e69742e636f6d",
-    "link": "tg://proxy?server=proxy.fluxoria.it.com&port=443&secret=ee307242dd41275c771f40035565d0750a70726f78792e666c75786f7269612e69742e636f6d",
-    "country": "NL",
-    "ping": 156
-  },
-  {
-    "host": "sazman-light.fookacell.ir",
-    "port": "443",
-    "secret": "ee1603010200010001fc030386e24c3add6d656469612e737465616d706f77657265642e636f6d)__",
-    "link": "tg://proxy?server=sazman-light.fookacell.ir&port=443&secret=ee1603010200010001fc030386e24c3add6d656469612e737465616d706f77657265642e636f6d)__",
-    "country": "DE",
-    "ping": 2408
-  },
-  {
-    "host": "144.124.232.130",
-    "port": "443",
-    "secret": "eeXifpB2GBv9shh2kvi5l",
-    "link": "tg://proxy?server=144.124.232.130&port=443&secret=eeXifpB2GBv9shh2kvi5l",
-    "country": "NL",
-    "ping": 167
-  },
-  {
-    "host": "95.85.245.239",
-    "port": "443",
-    "secret": "ee5b0da12abd60f4616a8a84d4787e1d",
-    "link": "tg://proxy?server=95.85.245.239&port=443&secret=ee5b0da12abd60f4616a8a84d4787e1d",
-    "country": "EE",
-    "ping": 164
+    "ping": 95
   },
   {
     "host": "64.176.20.45",
@@ -197,22 +29,414 @@
     "secret": "ddd642c2180045f2af6a18b36ba1feb364",
     "link": "tg://proxy?server=64.176.20.45&port=443&secret=ddd642c2180045f2af6a18b36ba1feb364",
     "country": "CL",
+    "ping": 122
+  },
+  {
+    "host": "Full1.filmne1t.info",
+    "port": "8080",
+    "secret": "dd49a70de57a60174f18dfd7fe6ef6aaf5",
+    "link": "tg://proxy?server=Full1.filmne1t.info&port=8080&secret=dd49a70de57a60174f18dfd7fe6ef6aaf5",
+    "country": "FI",
+    "ping": 2534
+  },
+  {
+    "host": "whey-protein.fookacell.ir",
+    "port": "443",
+    "secret": "7hYDAQIAAQAB_AMDhuJMOt1tZWRpYS5zdGVhbXBvd2VyZWQuY29t)__",
+    "link": "tg://proxy?server=whey-protein.fookacell.ir&port=443&secret=7hYDAQIAAQAB_AMDhuJMOt1tZWRpYS5zdGVhbXBvd2VyZWQuY29t)__",
+    "country": "DE",
+    "ping": 2320
+  },
+  {
+    "host": "172.234.115.238",
+    "port": "443",
+    "secret": "3a3365be03d6bc13518d65e70a3146c2",
+    "link": "tg://proxy?server=172.234.115.238&port=443&secret=3a3365be03d6bc13518d65e70a3146c2",
+    "country": "SE",
+    "ping": 98
+  },
+  {
+    "host": "185.182.82.73",
+    "port": "443",
+    "secret": "ee586cb8c65dc8c78f50bd4e573ae25f4873332e616d617a6f6e6177732e636f6d",
+    "link": "tg://proxy?server=185.182.82.73&port=443&secret=ee586cb8c65dc8c78f50bd4e573ae25f4873332e616d617a6f6e6177732e636f6d",
+    "country": "NL",
+    "ping": 88
+  },
+  {
+    "host": "92.118.234.215",
+    "port": "443",
+    "secret": "dddb9b51b5ce9a2820ff62d348cb23f1b9",
+    "link": "tg://proxy?server=92.118.234.215&port=443&secret=dddb9b51b5ce9a2820ff62d348cb23f1b9",
+    "country": "FI",
+    "ping": 102
+  },
+  {
+    "host": "91.107.189.181",
+    "port": "8443",
+    "secret": "dd104462821249bd7ac519130220c25d09",
+    "link": "tg://proxy?server=91.107.189.181&port=8443&secret=dd104462821249bd7ac519130220c25d09",
+    "country": "DE",
+    "ping": 96
+  },
+  {
+    "host": "1431.full.filmne1t.info",
+    "port": "8080",
+    "secret": "dd49a70de57a60174f18dfd7fe6ef6aaf5",
+    "link": "tg://proxy?server=1431.full.filmne1t.info&port=8080&secret=dd49a70de57a60174f18dfd7fe6ef6aaf5",
+    "country": "FI",
+    "ping": 2536
+  },
+  {
+    "host": "164.92.85.56",
+    "port": "8443",
+    "secret": "ee6b96a90543e55d4ea59e7e0ae9420d4931313661613832363239613931383530303864343866633361333139643363342e636f6d",
+    "link": "tg://proxy?server=164.92.85.56&port=8443&secret=ee6b96a90543e55d4ea59e7e0ae9420d4931313661613832363239613931383530303864343866633361333139643363342e636f6d",
+    "country": "US",
+    "ping": 63
+  },
+  {
+    "host": "89.125.113.189",
+    "port": "443",
+    "secret": "ee19835aa301cd9a6ceb68ad8d5ad9e0ac79616e6465782e7275",
+    "link": "tg://proxy?server=89.125.113.189&port=443&secret=ee19835aa301cd9a6ceb68ad8d5ad9e0ac79616e6465782e7275",
+    "country": "DE",
+    "ping": 122
+  },
+  {
+    "host": "3.3pita.com",
+    "port": "25565",
+    "secret": "dd79e344818749bd7ac519130220c25d09)**",
+    "link": "tg://proxy?server=3.3pita.com&port=25565&secret=dd79e344818749bd7ac519130220c25d09)**",
+    "country": "CA",
+    "ping": 209
+  },
+  {
+    "host": "87.120.108.38",
+    "port": "443",
+    "secret": "f212b4ee21a6f1026aadae4ce0b08f98```",
+    "link": "tg://proxy?server=87.120.108.38&port=443&secret=f212b4ee21a6f1026aadae4ce0b08f98```",
+    "country": "LK",
+    "ping": 96
+  },
+  {
+    "host": "ak.yourline.online",
+    "port": "443",
+    "secret": "eed74b20f8b196edebcfdc6de8c8985d60616b2e796f75726c696e652e6f6e6c696e65",
+    "link": "tg://proxy?server=ak.yourline.online&port=443&secret=eed74b20f8b196edebcfdc6de8c8985d60616b2e796f75726c696e652e6f6e6c696e65",
+    "country": "NL",
     "ping": 151
   },
   {
-    "host": "195.254.165.250",
-    "port": "25565",
-    "secret": "dd79e344818749bd7ac519130220c25d09",
-    "link": "tg://proxy?server=195.254.165.250&port=25565&secret=dd79e344818749bd7ac519130220c25d09",
+    "host": "158.220.115.76",
+    "port": "443",
+    "secret": "ee5ca225658ba14e61d864b4ea5e07bcda636c6f7564666c6172652e636f6d",
+    "link": "tg://proxy?server=158.220.115.76&port=443&secret=ee5ca225658ba14e61d864b4ea5e07bcda636c6f7564666c6172652e636f6d",
     "country": "FR",
-    "ping": 147
+    "ping": 90
   },
   {
-    "host": "91.107.182.200",
-    "port": "8443",
-    "secret": "dd104462821249bd7ac519130220c25d09",
-    "link": "tg://proxy?server=91.107.182.200&port=8443&secret=dd104462821249bd7ac519130220c25d09",
+    "host": "tg1.tgproxy1.fun",
+    "port": "443",
+    "secret": "ee9f275776f928838953db9dc7c5629ef27467312e746770726f7879312e66756e",
+    "link": "tg://proxy?server=tg1.tgproxy1.fun&port=443&secret=ee9f275776f928838953db9dc7c5629ef27467312e746770726f7879312e66756e",
     "country": "DE",
-    "ping": 150
+    "ping": 167
+  },
+  {
+    "host": "78.47.82.66",
+    "port": "443",
+    "secret": "DDBighLLvXrFGRMCBVJdFQ",
+    "link": "tg://proxy?server=78.47.82.66&port=443&secret=DDBighLLvXrFGRMCBVJdFQ",
+    "country": "DE",
+    "ping": 98
+  },
+  {
+    "host": "116.203.121.51",
+    "port": "443",
+    "secret": "1603010200010001fc030386e24c3add",
+    "link": "tg://proxy?server=116.203.121.51&port=443&secret=1603010200010001fc030386e24c3add",
+    "country": "DE",
+    "ping": 93
+  },
+  {
+    "host": "2.27.22.112",
+    "port": "443",
+    "secret": "ee17ea0a2562ea669ebe7308ee7f9ae63b706574726f766963682e7275",
+    "link": "tg://proxy?server=2.27.22.112&port=443&secret=ee17ea0a2562ea669ebe7308ee7f9ae63b706574726f766963682e7275",
+    "country": "DE",
+    "ping": 97
+  },
+  {
+    "host": "mt.nowaboost.com",
+    "port": "853",
+    "secret": "4fd95a487c5c87ae82b6639a9b6b5ff2",
+    "link": "tg://proxy?server=mt.nowaboost.com&port=853&secret=4fd95a487c5c87ae82b6639a9b6b5ff2",
+    "country": "DE",
+    "ping": 397
+  },
+  {
+    "host": "78.17.8.163",
+    "port": "443",
+    "secret": "7dca6b75dc099aa1aee504098de965fd",
+    "link": "tg://proxy?server=78.17.8.163&port=443&secret=7dca6b75dc099aa1aee504098de965fd",
+    "country": "GB",
+    "ping": 104
+  },
+  {
+    "host": "195.254.165.247",
+    "port": "25565",
+    "secret": "dd79e344818749bd7ac519130220c25d09",
+    "link": "tg://proxy?server=195.254.165.247&port=25565&secret=dd79e344818749bd7ac519130220c25d09",
+    "country": "FR",
+    "ping": 87
+  },
+  {
+    "host": "178.105.168.17",
+    "port": "443",
+    "secret": "eeb67e98429f3ba8896ff33ab9ff9d18a1676f6f676c65617069732e636f6d",
+    "link": "tg://proxy?server=178.105.168.17&port=443&secret=eeb67e98429f3ba8896ff33ab9ff9d18a1676f6f676c65617069732e636f6d",
+    "country": "DE",
+    "ping": 93
+  },
+  {
+    "host": "proxy.jubaoku.com",
+    "port": "9443",
+    "secret": "2adab36179e7a39026adf74034615248",
+    "link": "tg://proxy?server=proxy.jubaoku.com&port=9443&secret=2adab36179e7a39026adf74034615248",
+    "country": "KR",
+    "ping": 8637
+  },
+  {
+    "host": "62.238.27.70",
+    "port": "443",
+    "secret": "dd104462821249bd7ac519130220c25d09",
+    "link": "tg://proxy?server=62.238.27.70&port=443&secret=dd104462821249bd7ac519130220c25d09",
+    "country": "NL",
+    "ping": 122
+  },
+  {
+    "host": "vpn.wemakecode.ru",
+    "port": "9443",
+    "secret": "fe0713355da8737fb5f7b09d9cddb1e4",
+    "link": "tg://proxy?server=vpn.wemakecode.ru&port=9443&secret=fe0713355da8737fb5f7b09d9cddb1e4",
+    "country": "DE",
+    "ping": 236
+  },
+  {
+    "host": "212.34.154.203",
+    "port": "443",
+    "secret": "eecBAgABAAfwAwOG4kw63QAAAARueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29t",
+    "link": "tg://proxy?server=212.34.154.203&port=443&secret=eecBAgABAAfwAwOG4kw63QAAAARueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29t",
+    "country": "NL",
+    "ping": 82
+  },
+  {
+    "host": "tg1.tgproxy1.fun",
+    "port": "443",
+    "secret": "ee9f275776f928838953db9dc7c5629ef27467312e746770726f7879312e66756e",
+    "link": "tg://proxy?server=tg1.tgproxy1.fun&port=443&secret=ee9f275776f928838953db9dc7c5629ef27467312e746770726f7879312e66756e",
+    "country": "DE",
+    "ping": 167
+  },
+  {
+    "host": "178.104.52.162",
+    "port": "443",
+    "secret": "dd104462821248bd7ac519130220c25d09`",
+    "link": "tg://proxy?server=178.104.52.162&port=443&secret=dd104462821248bd7ac519130220c25d09`",
+    "country": "DE",
+    "ping": 94
+  },
+  {
+    "host": "212.34.155.221",
+    "port": "443",
+    "secret": "eecBAgABAAfwAwOG4kw63QAAAARueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29t",
+    "link": "tg://proxy?server=212.34.155.221&port=443&secret=eecBAgABAAfwAwOG4kw63QAAAARueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29t",
+    "country": "NL",
+    "ping": 88
+  },
+  {
+    "host": "37.203.37.12",
+    "port": "443",
+    "secret": "7hAQEP8PSAZT____9QBuLmltZWRpYS5zdGVhbXBvd2VyZWQuY29t",
+    "link": "tg://proxy?server=37.203.37.12&port=443&secret=7hAQEP8PSAZT____9QBuLmltZWRpYS5zdGVhbXBvd2VyZWQuY29t",
+    "country": "LV",
+    "ping": 89
+  },
+  {
+    "host": "germany.tgproxysokol.pro",
+    "port": "8443",
+    "secret": "ee4215d16e455242e9b5ffb6349df285d06164732e78352e7275",
+    "link": "tg://proxy?server=germany.tgproxysokol.pro&port=8443&secret=ee4215d16e455242e9b5ffb6349df285d06164732e78352e7275",
+    "country": "DE",
+    "ping": 106
+  },
+  {
+    "host": "i-love-boobs.top",
+    "port": "853",
+    "secret": "ee54ce330e4690cc297d2b031ff3f288b06d742e616b656e61692e636c69636b",
+    "link": "tg://proxy?server=i-love-boobs.top&port=853&secret=ee54ce330e4690cc297d2b031ff3f288b06d742e616b656e61692e636c69636b",
+    "country": "US",
+    "ping": 114
+  },
+  {
+    "host": "87.120.108.38",
+    "port": "443",
+    "secret": "f212b4ee21a6f1026aadae4ce0b08f98",
+    "link": "tg://proxy?server=87.120.108.38&port=443&secret=f212b4ee21a6f1026aadae4ce0b08f98",
+    "country": "LK",
+    "ping": 95
+  },
+  {
+    "host": "ams1.tlgfast.com",
+    "port": "443",
+    "secret": "083fe0c452e2407d835537872f097c54",
+    "link": "tg://proxy?server=ams1.tlgfast.com&port=443&secret=083fe0c452e2407d835537872f097c54",
+    "country": "NL",
+    "ping": 178
+  },
+  {
+    "host": "195.254.165.4",
+    "port": "13",
+    "secret": "104462821249bd7ac519130220c25d09",
+    "link": "tg://proxy?server=195.254.165.4&port=13&secret=104462821249bd7ac519130220c25d09",
+    "country": "FR",
+    "ping": 99
+  },
+  {
+    "host": "111111.full.filmne1t.info",
+    "port": "8080",
+    "secret": "dd49a70de57a60174f18dfd7fe6ef6aaf5",
+    "link": "tg://proxy?server=111111.full.filmne1t.info&port=8080&secret=dd49a70de57a60174f18dfd7fe6ef6aaf5",
+    "country": "FI",
+    "ping": 2539
+  },
+  {
+    "host": "alo.acharbashi.info",
+    "port": "4515",
+    "secret": "eee9a4f23b1d768c04a8d7f39120ca5b6e626973636f7474692e79656b74616e65742e636f6d",
+    "link": "tg://proxy?server=alo.acharbashi.info&port=4515&secret=eee9a4f23b1d768c04a8d7f39120ca5b6e626973636f7474692e79656b74616e65742e636f6d",
+    "country": "US",
+    "ping": 129
+  },
+  {
+    "host": "46.8.237.133",
+    "port": "443",
+    "secret": "ddf52a783f8080016975d82b4302c451af",
+    "link": "tg://proxy?server=46.8.237.133&port=443&secret=ddf52a783f8080016975d82b4302c451af",
+    "country": "FI",
+    "ping": 109
+  },
+  {
+    "host": "5.75.217.248",
+    "port": "443",
+    "secret": "3XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt0",
+    "link": "tg://proxy?server=5.75.217.248&port=443&secret=3XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt03XnnAQIAAQAH8AMDhuJMOt0",
+    "country": "DE",
+    "ping": 97
+  },
+  {
+    "host": "2.27.12.116",
+    "port": "443",
+    "secret": "ee19130c695cf699d93f5a31ecf380d4426d742e736b6f746f62617a2e7275",
+    "link": "tg://proxy?server=2.27.12.116&port=443&secret=ee19130c695cf699d93f5a31ecf380d4426d742e736b6f746f62617a2e7275",
+    "country": "US",
+    "ping": 90
+  },
+  {
+    "host": "91.99.79.124",
+    "port": "443",
+    "secret": "7gAA8A8Pd1VV____9QBuLmltZWRpYS5zdGVhbXBvd2VyZWQuY29t",
+    "link": "tg://proxy?server=91.99.79.124&port=443&secret=7gAA8A8Pd1VV____9QBuLmltZWRpYS5zdGVhbXBvd2VyZWQuY29t",
+    "country": "DE",
+    "ping": 97
+  },
+  {
+    "host": "server3.mtproxygram.lol",
+    "port": "443",
+    "secret": "ee16ac683c4467cde70a6418a71571c67a62726f777365722e79616e6465782e636f6d",
+    "link": "tg://proxy?server=server3.mtproxygram.lol&port=443&secret=ee16ac683c4467cde70a6418a71571c67a62726f777365722e79616e6465782e636f6d",
+    "country": "PL",
+    "ping": 117
+  },
+  {
+    "host": "89.125.17.12",
+    "port": "45100",
+    "secret": "eebc4dccfbda58d9f3b574dcece8cd54bf6974756e65732e6170706c652e636f6d",
+    "link": "tg://proxy?server=89.125.17.12&port=45100&secret=eebc4dccfbda58d9f3b574dcece8cd54bf6974756e65732e6170706c652e636f6d",
+    "country": "NL",
+    "ping": 90
+  },
+  {
+    "host": "138.124.127.154",
+    "port": "443",
+    "secret": "ee0c480abc71136dd1c5dadf918e32cea7766b2e636f6d",
+    "link": "tg://proxy?server=138.124.127.154&port=443&secret=ee0c480abc71136dd1c5dadf918e32cea7766b2e636f6d",
+    "country": "SE",
+    "ping": 115
+  },
+  {
+    "host": "91.107.166.142",
+    "port": "8888",
+    "secret": "eeb10c15b9f659ae2b9f1e646c9c7c1f4073332e616d617a6f6e6177732e636f6d",
+    "link": "tg://proxy?server=91.107.166.142&port=8888&secret=eeb10c15b9f659ae2b9f1e646c9c7c1f4073332e616d617a6f6e6177732e636f6d",
+    "country": "DE",
+    "ping": 97
+  },
+  {
+    "host": "128.98.271.7.bvs.bunkhouses.ir",
+    "port": "443",
+    "secret": "EECLOUDASIzRJlmd4iaQg",
+    "link": "tg://proxy?server=128.98.271.7.bvs.bunkhouses.ir&port=443&secret=EECLOUDASIzRJlmd4iaQg",
+    "country": "NL",
+    "ping": 2373
+  },
+  {
+    "host": "164.90.237.85",
+    "port": "80",
+    "secret": "3V9HEDbXrf_pCKa76RM2stc=",
+    "link": "tg://proxy?server=164.90.237.85&port=80&secret=3V9HEDbXrf_pCKa76RM2stc=",
+    "country": "DE",
+    "ping": 88
+  },
+  {
+    "host": "8.218.181.227",
+    "port": "443",
+    "secret": "eedc12cba6cd4be9723f9b3e3c80980d8e617a7572652e6d6963726f736f66742e636f6d",
+    "link": "tg://proxy?server=8.218.181.227&port=443&secret=eedc12cba6cd4be9723f9b3e3c80980d8e617a7572652e6d6963726f736f66742e636f6d",
+    "country": "HK",
+    "ping": 208
+  },
+  {
+    "host": "bedebezanimcom.nokia.com.co.uk.do_yo.want_to.clash_with.this.microsoft.com.there_is_no.place_nano.localhost.bing.com.count_with_me.cyou.com.now_sudo.rm_rf.ddns.net.we_are_here.again_to_fight.with_everyone.i_am.the_internet.special.sadatnews.lflinkup.org",
+    "port": "443",
+    "secret": "ee1603010200010001fc030386e24c3add7777772e7370656564746573742e6e657",
+    "link": "tg://proxy?server=bedebezanimcom.nokia.com.co.uk.do_yo.want_to.clash_with.this.microsoft.com.there_is_no.place_nano.localhost.bing.com.count_with_me.cyou.com.now_sudo.rm_rf.ddns.net.we_are_here.again_to_fight.with_everyone.i_am.the_internet.special.sadatnews.lflinkup.org&port=443&secret=ee1603010200010001fc030386e24c3add7777772e7370656564746573742e6e657",
+    "country": "AU",
+    "ping": 496
+  },
+  {
+    "host": "185.221.219.42",
+    "port": "443",
+    "secret": "ee1603010200010001fc030386e24c3add64726f70626f782e636f6d",
+    "link": "tg://proxy?server=185.221.219.42&port=443&secret=ee1603010200010001fc030386e24c3add64726f70626f782e636f6d",
+    "country": "NL",
+    "ping": 87
+  },
+  {
+    "host": "hyper.sosproxy.space",
+    "port": "443",
+    "secret": "ee44adc4da5280b196fa8192ffb712cef964726976652e676f6f676c652e636f6d",
+    "link": "tg://proxy?server=hyper.sosproxy.space&port=443&secret=ee44adc4da5280b196fa8192ffb712cef964726976652e676f6f676c652e636f6d",
+    "country": "NL",
+    "ping": 297
+  },
+  {
+    "host": "138.201.195.175",
+    "port": "443",
+    "secret": "EERighJJvXrFGRMCIMJdCQ",
+    "link": "tg://proxy?server=138.201.195.175&port=443&secret=EERighJJvXrFGRMCIMJdCQ",
+    "country": "DE",
+    "ping": 97
   }
 ]
